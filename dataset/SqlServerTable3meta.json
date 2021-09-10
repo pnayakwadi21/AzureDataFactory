@@ -1,0 +1,26 @@
+{
+	"name": "SqlServerTable3meta",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "apiref",
+				"type": "nvarchar"
+			},
+			{
+				"name": "desttable",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

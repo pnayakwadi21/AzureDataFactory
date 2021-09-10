@@ -1,0 +1,61 @@
+{
+	"name": "SourceDataset_amk",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDf",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "jsonmultiarraylknkk.json",
+				"container": "praveen-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"returnReference": {
+					"type": "string"
+				},
+				"orderReference": {
+					"type": "string"
+				},
+				"customerId": {
+					"type": "integer"
+				},
+				"var": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"variantId": {
+								"type": "integer"
+							},
+							"quantity": {
+								"type": "integer"
+							}
+						}
+					}
+				},
+				"returnReason": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"code": {
+								"type": "integer"
+							},
+							"notes": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

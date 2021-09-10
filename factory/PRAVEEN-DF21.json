@@ -1,0 +1,9 @@
+{
+	"name": "PRAVEEN-DF21",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fbb92f70-12ce-40f6-a06c-39121a7fecf1",
+		"tenantId": "71c0b8a3-cb30-44d9-bee9-0711599b39e1"
+	}
+}

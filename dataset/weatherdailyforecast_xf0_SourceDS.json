@@ -1,0 +1,27 @@
+{
+	"name": "weatherdailyforecast_xf0_SourceDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestService3",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_relativeUrl": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "weatherdailyforecast_xf0_20210729"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().cw_relativeUrl",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,248 @@
+{
+	"name": "MetadataDrivenCopyTask_z88_BottomLevel",
+	"properties": {
+		"description": "This pipeline will copy objects from one group. The objects belonging to this group will be copied parallelly.",
+		"activities": [
+			{
+				"name": "ListObjectsFromOneGroup",
+				"description": "List objects from one group and iterate each of them to downstream activities",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.ObjectsPerGroupToCopy",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "RouteJobsBasedOnLoadingBehavior",
+							"description": "Check the loading behavior for each object if it requires full load or incremental load. If it is Default or FullLoad case, do full load. If it is DeltaLoad case, do incremental load via watermark column to identify changes.",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@json(item().DataLoadingBehaviorSettings).dataLoadingBehavior",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "FullLoad",
+										"activities": [
+											{
+												"name": "FullLoadOneObject",
+												"description": "Take a full snapshot on this object and copy it to the destination",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [
+													{
+														"name": "Source",
+														"value": "@{json(item().SourceObjectSettings).relativeUrl}"
+													},
+													{
+														"name": "Destination",
+														"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
+													}
+												],
+												"typeProperties": {
+													"source": {
+														"type": "RestSource",
+														"httpRequestTimeout": {
+															"value": "@json(item().CopySourceSettings).httpRequestTimeout",
+															"type": "Expression"
+														},
+														"requestInterval": {
+															"value": "@json(item().CopySourceSettings).requestInterval",
+															"type": "Expression"
+														},
+														"requestMethod": {
+															"value": "@json(item().CopySourceSettings).requestMethod",
+															"type": "Expression"
+														},
+														"additionalHeaders": {
+															"type": "Expression",
+															"value": {
+																"value": "@json(item().CopySourceSettings).additionalHeaders",
+																"type": "Expression"
+															}
+														}
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"preCopyScript": {
+															"value": "@json(item().CopySinkSettings).preCopyScript",
+															"type": "Expression"
+														},
+														"tableOption": {
+															"value": "@json(item().CopySinkSettings).tableOption",
+															"type": "Expression"
+														},
+														"writeBehavior": {
+															"type": "Expression",
+															"value": "@json(item().CopySinkSettings).writeBehavior"
+														}
+													},
+													"enableStaging": false,
+													"validateDataConsistency": false,
+													"translator": {
+														"value": "@json(item().CopyActivitySettings).translator",
+														"type": "Expression"
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "MetadataDrivenCopyTask_z88_SourceDS",
+														"type": "DatasetReference",
+														"parameters": {
+															"cw_relativeUrl": {
+																"value": "@json(item().SourceObjectSettings).relativeUrl",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "MetadataDrivenCopyTask_z88_DestinationDS",
+														"type": "DatasetReference",
+														"parameters": {
+															"cw_schema": {
+																"value": "@json(item().SinkObjectSettings).schema",
+																"type": "Expression"
+															},
+															"cw_table": {
+																"value": "@json(item().SinkObjectSettings).table",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								],
+								"defaultActivities": [
+									{
+										"name": "DefaultFullLoadOneObject",
+										"description": "Take a full snapshot on this object and copy it to the destination",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "7.00:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [
+											{
+												"name": "Source",
+												"value": "@{json(item().SourceObjectSettings).relativeUrl}"
+											},
+											{
+												"name": "Destination",
+												"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
+											}
+										],
+										"typeProperties": {
+											"source": {
+												"type": "RestSource",
+												"httpRequestTimeout": {
+													"value": "@json(item().CopySourceSettings).httpRequestTimeout",
+													"type": "Expression"
+												},
+												"requestInterval": {
+													"value": "@json(item().CopySourceSettings).requestInterval",
+													"type": "Expression"
+												},
+												"requestMethod": {
+													"value": "@json(item().CopySourceSettings).requestMethod",
+													"type": "Expression"
+												},
+												"additionalHeaders": {
+													"type": "Expression",
+													"value": {
+														"value": "@json(item().CopySourceSettings).additionalHeaders",
+														"type": "Expression"
+													}
+												}
+											},
+											"sink": {
+												"type": "SqlServerSink",
+												"preCopyScript": {
+													"value": "@json(item().CopySinkSettings).preCopyScript",
+													"type": "Expression"
+												},
+												"tableOption": {
+													"value": "@json(item().CopySinkSettings).tableOption",
+													"type": "Expression"
+												},
+												"writeBehavior": {
+													"type": "Expression",
+													"value": "@json(item().CopySinkSettings).writeBehavior"
+												}
+											},
+											"enableStaging": false,
+											"validateDataConsistency": false,
+											"translator": {
+												"value": "@json(item().CopyActivitySettings).translator",
+												"type": "Expression"
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "MetadataDrivenCopyTask_z88_SourceDS",
+												"type": "DatasetReference",
+												"parameters": {
+													"cw_relativeUrl": {
+														"value": "@json(item().SourceObjectSettings).relativeUrl",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "MetadataDrivenCopyTask_z88_DestinationDS",
+												"type": "DatasetReference",
+												"parameters": {
+													"cw_schema": {
+														"value": "@json(item().SinkObjectSettings).schema",
+														"type": "Expression"
+													},
+													"cw_table": {
+														"value": "@json(item().SinkObjectSettings).table",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"ObjectsPerGroupToCopy": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_z88_20210730"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-30T11:25:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

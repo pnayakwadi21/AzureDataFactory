@@ -1,0 +1,114 @@
+{
+	"name": "CopyPipeline_amk",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_amk",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "praveen-container//jsonmultiarraylknkk.json"
+					},
+					{
+						"name": "Destination",
+						"value": "filo//"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "arrayOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['returnReference']"
+								},
+								"sink": {
+									"path": "$['returnReference']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['orderReference']"
+								},
+								"sink": {
+									"path": "$['orderReference']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['customerId']"
+								},
+								"sink": {
+									"path": "$['customerId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['var'][0]['variantId']"
+								},
+								"sink": {
+									"path": "$['variantId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['var'][0]['quantity']"
+								},
+								"sink": {
+									"path": "$['qty']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_amk",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_amk",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-09-09T15:11:59Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

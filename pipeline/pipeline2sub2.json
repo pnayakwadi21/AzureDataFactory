@@ -1,0 +1,79 @@
+{
+	"name": "pipeline2sub2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "main",
+					"value": {
+						"value": "@pipeline().parameters.msa",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sub",
+					"value": {
+						"value": "@variables('main')[0].topping",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set variable3",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sbt",
+					"value": {
+						"value": "@variables('main')[0].batters.batter",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"msa": {
+				"type": "array"
+			}
+		},
+		"variables": {
+			"main": {
+				"type": "Array"
+			},
+			"sub": {
+				"type": "Array"
+			},
+			"sbt": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-10T15:52:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

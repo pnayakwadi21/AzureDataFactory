@@ -1,0 +1,27 @@
+{
+	"name": "MetadataDrivenCopyTask_z88_SourceDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Weatherbit",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_relativeUrl": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_z88_20210730"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().cw_relativeUrl",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

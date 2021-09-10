@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_esm_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedServiceSqlControl",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_esm_20210730"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "weather",
+			"table": "MainControlTable_esm"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_2x7",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedServiceSqlControl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "weather",
+			"table": "REST resource"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "weatherdailyforecast_xf0_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedServiceSqlControl",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "weatherdailyforecast_xf0_20210729"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Weather",
+			"table": "RestMetaDataForCopyLoad"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

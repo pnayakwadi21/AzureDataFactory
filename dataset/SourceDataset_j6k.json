@@ -1,0 +1,17 @@
+{
+	"name": "SourceDataset_j6k",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dftest"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

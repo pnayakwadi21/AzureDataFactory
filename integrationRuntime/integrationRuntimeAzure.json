@@ -1,0 +1,6 @@
+{
+	"name": "integrationRuntimeAzure",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

@@ -1,0 +1,98 @@
+{
+	"name": "CopyPipeline_7w0",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_7w0",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "filo//jsonmultiarray.json"
+					},
+					{
+						"name": "Destination",
+						"value": "praveen-container//JSONFT"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "FlattenHierarchy"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['returnReference']"
+								},
+								"sink": {
+									"path": "$['returnReference']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['orderReference']"
+								},
+								"sink": {
+									"path": "$['orderReference']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['customerId']"
+								},
+								"sink": {
+									"path": "$['customerId']"
+								}
+							}
+						],
+						"collectionReference": "$['items']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_7w0",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_7w0",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-09-09T12:42:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

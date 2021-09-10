@@ -1,0 +1,20 @@
+{
+	"name": "MetadataDrivenCopyTask_z88_ControlDS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedServiceSqlControl",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "MetadataDrivenCopyTask_z88_20210730"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Weather",
+			"table": "DynamicLoad"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

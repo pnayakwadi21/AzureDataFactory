@@ -1,0 +1,17 @@
+{
+	"name": "SqlServerH21",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=DWDEVDB,55219;initial catalog=H21_DW",
+			"userName": "universe\\nayakwadip",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJjYjVlZDZiYS0yOWM4LTQxMTItYWVjMy0wMmU5NjEzNTQ3YjgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeAzure",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

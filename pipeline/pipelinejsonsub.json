@@ -1,0 +1,60 @@
+{
+	"name": "pipelinejsonsub",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.mjson",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Execute PipelineInner",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "pipeline2sub2",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"msa": {
+										"value": "@array(item())",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"mjson": {
+				"type": "array"
+			}
+		},
+		"variables": {
+			"Marrayvar": {
+				"type": "Array"
+			},
+			"subjson1": {
+				"type": "Array"
+			},
+			"subjson2": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-11T10:46:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

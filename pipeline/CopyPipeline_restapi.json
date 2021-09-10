@@ -1,0 +1,217 @@
+{
+	"name": "CopyPipeline_restapi",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_2x7",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=3ff6578b600c4836aa388101b1bf64ff&include=hourly"
+					},
+					{
+						"name": "Destination",
+						"value": "weather.REST resource"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"tableOption": "autoCreate",
+						"writeBehavior": "insert"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['data'][0]['rh']"
+								},
+								"sink": {
+									"name": "rh"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['pod']"
+								},
+								"sink": {
+									"name": "pod"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['lon']"
+								},
+								"sink": {
+									"name": "lon"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['pres']"
+								},
+								"sink": {
+									"name": "pres"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['timezone']"
+								},
+								"sink": {
+									"name": "timezone"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['ob_time']"
+								},
+								"sink": {
+									"name": "ob_time"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['country_code']"
+								},
+								"sink": {
+									"name": "country_code"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['clouds']"
+								},
+								"sink": {
+									"name": "clouds"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['ts']"
+								},
+								"sink": {
+									"name": "ts"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['solar_rad']"
+								},
+								"sink": {
+									"name": "solar_rad"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['state_code']"
+								},
+								"sink": {
+									"name": "state_code"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['city_name']"
+								},
+								"sink": {
+									"name": "city_name"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['sunset']"
+								},
+								"sink": {
+									"name": "sunset"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['snow']"
+								},
+								"sink": {
+									"name": "snow"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['uv']"
+								},
+								"sink": {
+									"name": "uv"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['precip']"
+								},
+								"sink": {
+									"name": "precip"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['sunrise']"
+								},
+								"sink": {
+									"name": "sunri"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['weather']['description']"
+								},
+								"sink": {
+									"name": "descip"
+								}
+							},
+							{
+								"source": {
+									"path": "$['data'][0]['temp']"
+								},
+								"sink": {
+									"name": "temp"
+								}
+							}
+						],
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_2x7",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_2x7",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-07-29T10:22:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
