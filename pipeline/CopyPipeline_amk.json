@@ -81,14 +81,6 @@
 								"sink": {
 									"path": "$['variantId']"
 								}
-							},
-							{
-								"source": {
-									"path": "$['var'][0]['quantity']"
-								},
-								"sink": {
-									"path": "$['qty']"
-								}
 							}
 						]
 					}
