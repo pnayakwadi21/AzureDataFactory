@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "Copy_amk",
-				"description": "added description",
+				"description": "added description 2 descr",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
