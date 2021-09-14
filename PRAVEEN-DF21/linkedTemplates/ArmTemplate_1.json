@@ -1,0 +1,1424 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "PRAVEEN-DF21"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_j6k')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "dflowsrc",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_n00')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "copyfiletemprature",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "JsontestHierarchy.json",
+						"container": "praveen-container"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"ppu": {
+							"type": "number"
+						},
+						"batters": {
+							"type": "object",
+							"properties": {
+								"batter": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"id": {
+												"type": "string"
+											},
+											"type": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"topping": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json10')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "hierar",
+						"container": "filo"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"ppu": {
+							"type": "number"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json11')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "trt",
+						"container": "filo"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"type": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						},
+						"ppu": {
+							"type": "number"
+						},
+						"batters": {
+							"type": "object",
+							"properties": {
+								"batter": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"id": {
+												"type": "string"
+											},
+											"type": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"topping": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"type": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json12')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "workerposts.json",
+						"container": "zellis-rl"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"WorkerNumber": {
+							"type": "string"
+						},
+						"PayGroupId": {
+							"type": "integer"
+						},
+						"ProbationPassedDate": {
+							"type": "string"
+						},
+						"TitleId": {
+							"type": "integer"
+						},
+						"PreviousSurname": {
+							"type": "string"
+						},
+						"OtherForenames": {
+							"type": "string"
+						},
+						"ReligionId": {
+							"type": "integer"
+						},
+						"EmployeeTypeId": {
+							"type": "integer"
+						},
+						"FirstForename": {
+							"type": "string"
+						},
+						"PayMethodId": {
+							"type": "integer"
+						},
+						"OriginalJoinReasonId": {
+							"type": "integer"
+						},
+						"WorkTelephoneNumber": {
+							"type": "string"
+						},
+						"PersonalEmail": {
+							"type": "string"
+						},
+						"AddressId": {
+							"type": "integer"
+						},
+						"LastPaidDate": {
+							"type": "string"
+						},
+						"OriginalStartDate": {
+							"type": "string"
+						},
+						"LastPaidYear": {
+							"type": "string"
+						},
+						"Surname": {
+							"type": "string"
+						},
+						"KnownAs": {
+							"type": "string"
+						},
+						"CurrentJoinReasonId": {
+							"type": "integer"
+						},
+						"HomeTelephoneNumber": {
+							"type": "string"
+						},
+						"CurrentStartDate": {
+							"type": "string"
+						},
+						"DeathDate": {
+							"type": "string"
+						},
+						"MaritalStatusEffectiveDate": {
+							"type": "string"
+						},
+						"LegislationTypeId": {
+							"type": "integer"
+						},
+						"BusinessEmail": {
+							"type": "string"
+						},
+						"WorkerId": {
+							"type": "integer"
+						},
+						"EthnicOriginId": {
+							"type": "integer"
+						},
+						"Initials": {
+							"type": "string"
+						},
+						"PayGroupEffectiveDate": {
+							"type": "string"
+						},
+						"GenderId": {
+							"type": "integer"
+						},
+						"LanguageId": {
+							"type": "integer"
+						},
+						"BirthDate": {
+							"type": "string"
+						},
+						"NationalInsuranceNo": {
+							"type": "string"
+						},
+						"CountryOfBirthId": {
+							"type": "integer"
+						},
+						"MaritalStatusId": {
+							"type": "integer"
+						},
+						"IsCurrent": {
+							"type": "boolean"
+						},
+						"WorkTelephoneExtension": {
+							"type": "string"
+						},
+						"LeaveReasonId": {
+							"type": "integer"
+						},
+						"BankAccountId": {
+							"type": "integer"
+						},
+						"LeaveDate": {
+							"type": "string"
+						},
+						"MobileTelephoneNumber": {
+							"type": "string"
+						},
+						"LastPaidPeriod": {
+							"type": "string"
+						},
+						"ControlGroupId": {
+							"type": "integer"
+						},
+						"Age": {
+							"type": "integer"
+						},
+						"TemporaryPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPosts": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Gender": {
+							"type": "object"
+						},
+						"CurrentMainWorkerPost": {
+							"type": "object"
+						},
+						"EthnicOrigin": {
+							"type": "object"
+						},
+						"OperatorProfileToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerParentalLeave": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Title": {
+							"type": "object"
+						},
+						"WorkerPayPeriods": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"ControlGroup": {
+							"type": "object"
+						},
+						"OriginalJoinReason": {
+							"type": "object"
+						},
+						"CountryOfBirth": {
+							"type": "object"
+						},
+						"PayMethod": {
+							"type": "object"
+						},
+						"CurrentYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PeriodOnPeriodYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"BankAccount": {
+							"type": "object"
+						},
+						"WorkerUSCDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerTaxCodeHistories": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Address": {
+							"type": "object"
+						},
+						"ReportingLevels": {
+							"type": "object"
+						},
+						"UserSecurityToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPRSIDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPensionSchemes": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PayGroup": {
+							"type": "object"
+						},
+						"Religion": {
+							"type": "object"
+						},
+						"AbsenceEntitlements": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"CurrentJoinReason": {
+							"type": "object"
+						},
+						"WorkerCostingData": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"EmployeeType": {
+							"type": "object"
+						},
+						"LeaveReason": {
+							"type": "object"
+						},
+						"LegislationType": {
+							"type": "object"
+						},
+						"AbsenceHeaders": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"MaritalStatus": {
+							"type": "object"
+						},
+						"Managers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"FixedPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerBenefits": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json13')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "workerposts.json",
+						"container": "zellis-rl"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"WorkerNumber": {
+							"type": "string"
+						},
+						"PayGroupId": {
+							"type": "integer"
+						},
+						"ProbationPassedDate": {
+							"type": "string"
+						},
+						"TitleId": {
+							"type": "integer"
+						},
+						"PreviousSurname": {
+							"type": "string"
+						},
+						"OtherForenames": {
+							"type": "string"
+						},
+						"ReligionId": {
+							"type": "integer"
+						},
+						"EmployeeTypeId": {
+							"type": "integer"
+						},
+						"FirstForename": {
+							"type": "string"
+						},
+						"PayMethodId": {
+							"type": "integer"
+						},
+						"OriginalJoinReasonId": {
+							"type": "integer"
+						},
+						"WorkTelephoneNumber": {
+							"type": "string"
+						},
+						"PersonalEmail": {
+							"type": "string"
+						},
+						"AddressId": {
+							"type": "integer"
+						},
+						"LastPaidDate": {
+							"type": "string"
+						},
+						"OriginalStartDate": {
+							"type": "string"
+						},
+						"LastPaidYear": {
+							"type": "string"
+						},
+						"Surname": {
+							"type": "string"
+						},
+						"KnownAs": {
+							"type": "string"
+						},
+						"CurrentJoinReasonId": {
+							"type": "integer"
+						},
+						"HomeTelephoneNumber": {
+							"type": "string"
+						},
+						"CurrentStartDate": {
+							"type": "string"
+						},
+						"DeathDate": {
+							"type": "string"
+						},
+						"MaritalStatusEffectiveDate": {
+							"type": "string"
+						},
+						"LegislationTypeId": {
+							"type": "integer"
+						},
+						"BusinessEmail": {
+							"type": "string"
+						},
+						"WorkerId": {
+							"type": "integer"
+						},
+						"EthnicOriginId": {
+							"type": "integer"
+						},
+						"Initials": {
+							"type": "string"
+						},
+						"PayGroupEffectiveDate": {
+							"type": "string"
+						},
+						"GenderId": {
+							"type": "integer"
+						},
+						"LanguageId": {
+							"type": "integer"
+						},
+						"BirthDate": {
+							"type": "string"
+						},
+						"NationalInsuranceNo": {
+							"type": "string"
+						},
+						"CountryOfBirthId": {
+							"type": "integer"
+						},
+						"MaritalStatusId": {
+							"type": "integer"
+						},
+						"IsCurrent": {
+							"type": "boolean"
+						},
+						"WorkTelephoneExtension": {
+							"type": "string"
+						},
+						"LeaveReasonId": {
+							"type": "integer"
+						},
+						"BankAccountId": {
+							"type": "integer"
+						},
+						"LeaveDate": {
+							"type": "string"
+						},
+						"MobileTelephoneNumber": {
+							"type": "string"
+						},
+						"LastPaidPeriod": {
+							"type": "string"
+						},
+						"ControlGroupId": {
+							"type": "integer"
+						},
+						"Age": {
+							"type": "integer"
+						},
+						"TemporaryPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPosts": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Gender": {
+							"type": "object"
+						},
+						"CurrentMainWorkerPost": {
+							"type": "object"
+						},
+						"EthnicOrigin": {
+							"type": "object"
+						},
+						"OperatorProfileToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerParentalLeave": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Title": {
+							"type": "object"
+						},
+						"WorkerPayPeriods": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"ControlGroup": {
+							"type": "object"
+						},
+						"OriginalJoinReason": {
+							"type": "object"
+						},
+						"CountryOfBirth": {
+							"type": "object"
+						},
+						"PayMethod": {
+							"type": "object"
+						},
+						"CurrentYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PeriodOnPeriodYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"BankAccount": {
+							"type": "object"
+						},
+						"WorkerUSCDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerTaxCodeHistories": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Address": {
+							"type": "object"
+						},
+						"ReportingLevels": {
+							"type": "object"
+						},
+						"UserSecurityToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPRSIDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPensionSchemes": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PayGroup": {
+							"type": "object"
+						},
+						"Religion": {
+							"type": "object"
+						},
+						"AbsenceEntitlements": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"CurrentJoinReason": {
+							"type": "object"
+						},
+						"WorkerCostingData": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"EmployeeType": {
+							"type": "object"
+						},
+						"LeaveReason": {
+							"type": "object"
+						},
+						"LegislationType": {
+							"type": "object"
+						},
+						"AbsenceHeaders": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"MaritalStatus": {
+							"type": "object"
+						},
+						"Managers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"FixedPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerBenefits": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json14')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "rt",
+						"container": "zellis-rl"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask2_vj9_DestinationDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_columnDelimiter": {
+						"type": "String"
+					},
+					"cw_escapeChar": {
+						"type": "String"
+					},
+					"cw_quoteChar": {
+						"type": "String"
+					},
+					"cw_fileName": {
+						"type": "String"
+					},
+					"cw_folderPath": {
+						"type": "Object"
+					},
+					"cw_container": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask2_vj9_20210728"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().cw_fileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().cw_folderPath",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().cw_container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": {
+						"value": "@dataset().cw_columnDelimiter",
+						"type": "Expression"
+					},
+					"escapeChar": {
+						"value": "@dataset().cw_escapeChar",
+						"type": "Expression"
+					},
+					"quoteChar": {
+						"value": "@dataset().cw_quoteChar",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask2_vj9_SourceDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_columnDelimiter": {
+						"type": "String"
+					},
+					"cw_escapeChar": {
+						"type": "String"
+					},
+					"cw_quoteChar": {
+						"type": "String"
+					},
+					"cw_firstRowAsHeader": {
+						"type": "Bool"
+					},
+					"cw_fileName": {
+						"type": "Object"
+					},
+					"cw_folderPath": {
+						"type": "String"
+					},
+					"cw_container": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask2_vj9_20210728"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().cw_fileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().cw_folderPath",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().cw_container",
+							"type": "Expression"
+						}
+					},
+					"columnDelimiter": {
+						"value": "@dataset().cw_columnDelimiter",
+						"type": "Expression"
+					},
+					"escapeChar": {
+						"value": "@dataset().cw_escapeChar",
+						"type": "Expression"
+					},
+					"firstRowAsHeader": {
+						"value": "@dataset().cw_firstRowAsHeader",
+						"type": "Expression"
+					},
+					"quoteChar": {
+						"value": "@dataset().cw_quoteChar",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_esm_SourceDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService3",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_relativeUrl": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_esm_20210730"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().cw_relativeUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_SourceDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Weatherbit",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_relativeUrl": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_z88_20210730"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().cw_relativeUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService4",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"BaseUrl": {
+						"type": "string",
+						"defaultValue": "\"https://api.weatherbit.io/v2.0/current?@city=Paris&Api_Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9\""
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().BaseUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_2x7')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Weatherbit",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=3ff6578b600c4836aa388101b1bf64ff&include=hourly"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_7cx')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "newspace.txt",
+						"container": "filo"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_7w0')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "jsonmultiarray.json",
+						"container": "filo"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"returnReference": {
+							"type": "string"
+						},
+						"orderReference": {
+							"type": "string"
+						},
+						"customerId": {
+							"type": "integer"
+						},
+						"items": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"variantId": {
+										"type": "integer"
+									},
+									"quantity": {
+										"type": "integer"
+									},
+									"returnReason": {
+										"type": "object",
+										"properties": {
+											"code": {
+												"type": "integer"
+											},
+											"notes": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"timestamp": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_amk')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "jsonmultiarraylknkk.json",
+						"container": "praveen-container"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"returnReference": {
+							"type": "string"
+						},
+						"orderReference": {
+							"type": "string"
+						},
+						"customerId": {
+							"type": "integer"
+						},
+						"var": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"variantId": {
+										"type": "integer"
+									},
+									"quantity": {
+										"type": "integer"
+									}
+								}
+							}
+						},
+						"returnReason": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"code": {
+										"type": "integer"
+									},
+									"notes": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_n00')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorageDf",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "temperature.txt",
+						"folderPath": "test-folder-praveen",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": false,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/jsonflat')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/spacedeldataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "newspac",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}

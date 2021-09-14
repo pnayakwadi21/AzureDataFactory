@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "PRAVEEN-DF21"
+		},
+		"AzureBlobStorageDf_connectionString": {
+			"value": ""
+		},
+		"AzureStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"SqlServerH21_connectionString": {
+			"value": ""
+		},
+		"SqlServerH21_password": {
+			"value": ""
+		},
+		"SqlServerStagingList_connectionString": {
+			"value": ""
+		},
+		"SqlServerStagingList_password": {
+			"value": ""
+		},
+		"Store Account Linked Service_connectionString": {
+			"value": ""
+		},
+		"linkedService1_connectionString": {
+			"value": ""
+		},
+		"linkedServiceSqlControl_connectionString": {
+			"value": ""
+		},
+		"linkedServiceSqlControl_password": {
+			"value": ""
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://undefined.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"value": "71c0b8a3-cb30-44d9-bee9-0711599b39e1"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://use-land-property-data.service.gov.uk/api/v1/datasets/Leases_COU/?Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"value": "https://use-land-property-data.service.gov.uk/api/v1/datasets/ccod?/Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9"
+		},
+		"RestService3_properties_typeProperties_url": {
+			"value": "https://api.weatherbit.io/v2.0/"
+		},
+		"RestService4_properties_typeProperties_url": {
+			"value": "http://api.weatherbit.io/v2.0/current"
+		},
+		"SqlServerH21_properties_typeProperties_userName": {
+			"value": "universe\\nayakwadip"
+		},
+		"SqlServerStagingList_properties_typeProperties_userName": {
+			"value": "universe\\nayakwadip"
+		},
+		"Weatherbit_properties_typeProperties_url": {
+			"value": "https://api.weatherbit.io/v2.0/"
+		},
+		"linkedServiceSqlControl_properties_typeProperties_userName": {
+			"value": "universe\\nayakwadip"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

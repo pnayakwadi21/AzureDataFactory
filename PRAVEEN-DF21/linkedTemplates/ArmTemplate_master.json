@@ -1,0 +1,262 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "PRAVEEN-DF21"
+		},
+		"AzureBlobStorageDf_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageDf'"
+		},
+		"AzureStorageLinkedService_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
+		},
+		"SqlServerH21_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServerH21'"
+		},
+		"SqlServerH21_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerH21'"
+		},
+		"SqlServerStagingList_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServerStagingList'"
+		},
+		"SqlServerStagingList_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerStagingList'"
+		},
+		"Store Account Linked Service_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Store Account Linked Service'"
+		},
+		"linkedService1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
+		},
+		"linkedServiceSqlControl_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'linkedServiceSqlControl'"
+		},
+		"linkedServiceSqlControl_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'linkedServiceSqlControl'"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://undefined.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "71c0b8a3-cb30-44d9-bee9-0711599b39e1"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://use-land-property-data.service.gov.uk/api/v1/datasets/Leases_COU/?Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9"
+		},
+		"RestService2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://use-land-property-data.service.gov.uk/api/v1/datasets/ccod?/Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9"
+		},
+		"RestService3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.weatherbit.io/v2.0/"
+		},
+		"RestService4_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "http://api.weatherbit.io/v2.0/current"
+		},
+		"SqlServerH21_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
+		},
+		"SqlServerStagingList_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
+		},
+		"Weatherbit_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.weatherbit.io/v2.0/"
+		},
+		"linkedServiceSqlControl_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorageDf_connectionString": {
+						"value": "[parameters('AzureBlobStorageDf_connectionString')]"
+					},
+					"AzureStorageLinkedService_connectionString": {
+						"value": "[parameters('AzureStorageLinkedService_connectionString')]"
+					},
+					"Store Account Linked Service_connectionString": {
+						"value": "[parameters('Store Account Linked Service_connectionString')]"
+					},
+					"linkedService1_connectionString": {
+						"value": "[parameters('linkedService1_connectionString')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_tenant')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"RestService2_properties_typeProperties_url": {
+						"value": "[parameters('RestService2_properties_typeProperties_url')]"
+					},
+					"RestService3_properties_typeProperties_url": {
+						"value": "[parameters('RestService3_properties_typeProperties_url')]"
+					},
+					"RestService4_properties_typeProperties_url": {
+						"value": "[parameters('RestService4_properties_typeProperties_url')]"
+					},
+					"Weatherbit_properties_typeProperties_url": {
+						"value": "[parameters('Weatherbit_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"SqlServerH21_connectionString": {
+						"value": "[parameters('SqlServerH21_connectionString')]"
+					},
+					"SqlServerH21_password": {
+						"value": "[parameters('SqlServerH21_password')]"
+					},
+					"SqlServerStagingList_connectionString": {
+						"value": "[parameters('SqlServerStagingList_connectionString')]"
+					},
+					"SqlServerStagingList_password": {
+						"value": "[parameters('SqlServerStagingList_password')]"
+					},
+					"linkedServiceSqlControl_connectionString": {
+						"value": "[parameters('linkedServiceSqlControl_connectionString')]"
+					},
+					"linkedServiceSqlControl_password": {
+						"value": "[parameters('linkedServiceSqlControl_password')]"
+					},
+					"SqlServerH21_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerH21_properties_typeProperties_userName')]"
+					},
+					"SqlServerStagingList_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerStagingList_properties_typeProperties_userName')]"
+					},
+					"linkedServiceSqlControl_properties_typeProperties_userName": {
+						"value": "[parameters('linkedServiceSqlControl_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_3')]"
+			]
+		}
+	]
+}
