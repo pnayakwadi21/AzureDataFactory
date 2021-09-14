@@ -1,0 +1,101 @@
+{
+	"name": "CopyPipeline_b3o",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_b3o",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "zellis-rl//rt"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.post"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['WorkerNumber']"
+								},
+								"sink": {
+									"name": "WorkerNumber"
+								}
+							},
+							{
+								"source": {
+									"path": "$['FirstForename']"
+								},
+								"sink": {
+									"name": "FirstForename"
+								}
+							},
+							{
+								"source": {
+									"path": "$['WorkTelephoneExtension']"
+								},
+								"sink": {
+									"name": "WorkTelephoneExtension",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['WorkerPayPeriods']"
+								},
+								"sink": {
+									"name": "WorkerPayPeriods",
+									"type": "String"
+								}
+							}
+						],
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_b3o",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_b3o",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
