@@ -13,6 +13,52 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedServiceSqlControl",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "api"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerH21",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"tablename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": {
+						"value": "@dataset().tablename",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable3meta')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -234,6 +280,41 @@
 						}
 					],
 					"script": "source(output(\n\t\tcol0 as string,\n\t\tcol1 as string,\n\t\tcol2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tignoreNoFilesFound: false) ~> source1\nsource1 parse(col22 = col2 ? (val1 as integer,\n\t\tval2 as integer,\n\t\tval3 as integer),\n\tformat: 'delimited',\n\tcolumnNamesAsHeader: false,\n\tcolumnDelimiter: ',',\n\tnullValue: '') ~> Parse1\nParse1 select(mapColumn(\n\t\tcol0,\n\t\tcol1,\n\t\tval1 = col22.val1,\n\t\tval2 = col22.val2,\n\t\tval3 = col22.val3\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow4')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Json15",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText8",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Flatten1"
+						}
+					],
+					"script": "source(output(\n\t\tWorkerNumber as string,\n\t\tPayGroupId as integer,\n\t\tProbationPassedDate as string,\n\t\tTitleId as integer,\n\t\tPreviousSurname as string,\n\t\tOtherForenames as string,\n\t\tReligionId as integer,\n\t\tEmployeeTypeId as integer,\n\t\tFirstForename as string,\n\t\tPayMethodId as integer,\n\t\tOriginalJoinReasonId as integer,\n\t\tWorkTelephoneNumber as string,\n\t\tPersonalEmail as string,\n\t\tAddressId as integer,\n\t\tLastPaidDate as string,\n\t\tOriginalStartDate as string,\n\t\tLastPaidYear as string,\n\t\tSurname as string,\n\t\tKnownAs as string,\n\t\tCurrentJoinReasonId as integer,\n\t\tHomeTelephoneNumber as string,\n\t\tCurrentStartDate as string,\n\t\tDeathDate as string,\n\t\tMaritalStatusEffectiveDate as string,\n\t\tLegislationTypeId as integer,\n\t\tBusinessEmail as string,\n\t\tWorkerId as integer,\n\t\tEthnicOriginId as integer,\n\t\tInitials as string,\n\t\tPayGroupEffectiveDate as string,\n\t\tGenderId as integer,\n\t\tLanguageId as integer,\n\t\tBirthDate as string,\n\t\tNationalInsuranceNo as string,\n\t\tCountryOfBirthId as integer,\n\t\tMaritalStatusId as integer,\n\t\tIsCurrent as boolean,\n\t\tWorkTelephoneExtension as string,\n\t\tLeaveReasonId as integer,\n\t\tBankAccountId as integer,\n\t\tLeaveDate as string,\n\t\tMobileTelephoneNumber as string,\n\t\tLastPaidPeriod as string,\n\t\tControlGroupId as integer,\n\t\tAge as integer,\n\t\tTemporaryPayments as ({} as string)[],\n\t\tWorkerPosts as ({} as string)[],\n\t\tGender as ({} as string),\n\t\tCurrentMainWorkerPost as ({} as string),\n\t\tEthnicOrigin as ({} as string),\n\t\tOperatorProfileToWorkers as ({} as string)[],\n\t\tWorkerParentalLeave as ({} as string)[],\n\t\tTitle as ({} as string),\n\t\tWorkerPayPeriods as ({} as string)[],\n\t\tControlGroup as ({} as string),\n\t\tOriginalJoinReason as ({} as string),\n\t\tCountryOfBirth as ({} as string),\n\t\tPayMethod as ({} as string),\n\t\tCurrentYTDs as ({} as string)[],\n\t\tPeriodOnPeriodYTDs as ({} as string)[],\n\t\tBankAccount as ({} as string),\n\t\tWorkerUSCDetails as ({} as string)[],\n\t\tWorkerTaxCodeHistories as ({} as string)[],\n\t\tAddress as ({} as string),\n\t\tReportingLevels as ({} as string),\n\t\tUserSecurityToWorkers as ({} as string)[],\n\t\tWorkerPRSIDetails as ({} as string)[],\n\t\tWorkerPensionSchemes as ({} as string)[],\n\t\tPayGroup as ({} as string),\n\t\tReligion as ({} as string),\n\t\tAbsenceEntitlements as ({} as string)[],\n\t\tCurrentJoinReason as ({} as string),\n\t\tWorkerCostingData as ({} as string)[],\n\t\tEmployeeType as ({} as string),\n\t\tLeaveReason as ({} as string),\n\t\tLegislationType as ({} as string),\n\t\tAbsenceHeaders as ({} as string)[],\n\t\tMaritalStatus as ({} as string),\n\t\tManagers as ({} as string)[],\n\t\tFixedPayments as ({} as string)[],\n\t\tWorkerBenefits as ({} as string)[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments',\n\tbackslashEscape: true) ~> source1\nsource1 foldDown(unroll(TemporaryPayments, TemporaryPayments),\n\tmapColumn(\n\t\ttp = TemporaryPayments.{},\n\t\tWorkerNumber,\n\t\tPreviousSurname,\n\t\tFirstForename\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
 				}
 			},
 			"dependsOn": []
@@ -1302,7 +1383,9 @@
 				"annotations": [],
 				"lastPublishTime": "2021-08-09T09:35:42Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
@@ -1348,6 +1431,49 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow2')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline2_workerposts-dataflow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow4",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow4",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow4')]"
 			]
 		},
 		{
@@ -1445,501 +1571,8 @@
 				"annotations": [],
 				"lastPublishTime": "2021-08-06T14:57:24Z"
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2spacedeli')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "dataflow3",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dataflow3",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2021-09-03T13:47:21Z"
-			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow3')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/weatherdailyforecast_xf0_BottomLevel')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "This pipeline will copy objects from one group. The objects belonging to this group will be copied parallelly.",
-				"activities": [
-					{
-						"name": "ListObjectsFromOneGroup",
-						"description": "List objects from one group and iterate each of them to downstream activities",
-						"type": "ForEach",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.ObjectsPerGroupToCopy",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "RouteJobsBasedOnLoadingBehavior",
-									"description": "Check the loading behavior for each object if it requires full load or incremental load. If it is Default or FullLoad case, do full load. If it is DeltaLoad case, do incremental load via watermark column to identify changes.",
-									"type": "Switch",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"on": {
-											"value": "@json(item().DataLoadingBehaviorSettings).dataLoadingBehavior",
-											"type": "Expression"
-										},
-										"cases": [
-											{
-												"value": "FullLoad",
-												"activities": [
-													{
-														"name": "FullLoadOneObject",
-														"description": "Take a full snapshot on this object and copy it to the destination",
-														"type": "Copy",
-														"dependsOn": [],
-														"policy": {
-															"timeout": "7.00:00:00",
-															"retry": 0,
-															"retryIntervalInSeconds": 30,
-															"secureOutput": false,
-															"secureInput": false
-														},
-														"userProperties": [
-															{
-																"name": "Source",
-																"value": "@{json(item().SourceObjectSettings).relativeUrl}"
-															},
-															{
-																"name": "Destination",
-																"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
-															}
-														],
-														"typeProperties": {
-															"source": {
-																"type": "RestSource",
-																"httpRequestTimeout": {
-																	"value": "@json(item().CopySourceSettings).httpRequestTimeout",
-																	"type": "Expression"
-																},
-																"requestInterval": {
-																	"value": "@json(item().CopySourceSettings).requestInterval",
-																	"type": "Expression"
-																},
-																"requestMethod": {
-																	"value": "@json(item().CopySourceSettings).requestMethod",
-																	"type": "Expression"
-																},
-																"additionalHeaders": {
-																	"type": "Expression",
-																	"value": {
-																		"value": "@json(item().CopySourceSettings).additionalHeaders",
-																		"type": "Expression"
-																	}
-																}
-															},
-															"sink": {
-																"type": "SqlServerSink",
-																"preCopyScript": {
-																	"value": "@json(item().CopySinkSettings).preCopyScript",
-																	"type": "Expression"
-																},
-																"tableOption": {
-																	"value": "@json(item().CopySinkSettings).tableOption",
-																	"type": "Expression"
-																},
-																"writeBehavior": {
-																	"type": "Expression",
-																	"value": "@json(item().CopySinkSettings).writeBehavior"
-																}
-															},
-															"enableStaging": false,
-															"validateDataConsistency": false,
-															"translator": {
-																"value": "@json(item().CopyActivitySettings).translator",
-																"type": "Expression"
-															}
-														},
-														"inputs": [
-															{
-																"referenceName": "weatherdailyforecast_xf0_SourceDS",
-																"type": "DatasetReference",
-																"parameters": {
-																	"cw_relativeUrl": {
-																		"value": "@json(item().SourceObjectSettings).relativeUrl",
-																		"type": "Expression"
-																	}
-																}
-															}
-														],
-														"outputs": [
-															{
-																"referenceName": "weatherdailyforecast_xf0_DestinationDS",
-																"type": "DatasetReference",
-																"parameters": {
-																	"cw_schema": {
-																		"value": "@json(item().SinkObjectSettings).schema",
-																		"type": "Expression"
-																	},
-																	"cw_table": {
-																		"value": "@json(item().SinkObjectSettings).table",
-																		"type": "Expression"
-																	}
-																}
-															}
-														]
-													}
-												]
-											}
-										],
-										"defaultActivities": [
-											{
-												"name": "DefaultFullLoadOneObject",
-												"description": "Take a full snapshot on this object and copy it to the destination",
-												"type": "Copy",
-												"dependsOn": [],
-												"policy": {
-													"timeout": "7.00:00:00",
-													"retry": 0,
-													"retryIntervalInSeconds": 30,
-													"secureOutput": false,
-													"secureInput": false
-												},
-												"userProperties": [
-													{
-														"name": "Source",
-														"value": "@{json(item().SourceObjectSettings).relativeUrl}"
-													},
-													{
-														"name": "Destination",
-														"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
-													}
-												],
-												"typeProperties": {
-													"source": {
-														"type": "RestSource",
-														"httpRequestTimeout": {
-															"value": "@json(item().CopySourceSettings).httpRequestTimeout",
-															"type": "Expression"
-														},
-														"requestInterval": {
-															"value": "@json(item().CopySourceSettings).requestInterval",
-															"type": "Expression"
-														},
-														"requestMethod": {
-															"value": "@json(item().CopySourceSettings).requestMethod",
-															"type": "Expression"
-														},
-														"additionalHeaders": {
-															"type": "Expression",
-															"value": {
-																"value": "@json(item().CopySourceSettings).additionalHeaders",
-																"type": "Expression"
-															}
-														}
-													},
-													"sink": {
-														"type": "SqlServerSink",
-														"preCopyScript": {
-															"value": "@json(item().CopySinkSettings).preCopyScript",
-															"type": "Expression"
-														},
-														"tableOption": {
-															"value": "@json(item().CopySinkSettings).tableOption",
-															"type": "Expression"
-														},
-														"writeBehavior": {
-															"type": "Expression",
-															"value": "@json(item().CopySinkSettings).writeBehavior"
-														}
-													},
-													"enableStaging": false,
-													"validateDataConsistency": false,
-													"translator": {
-														"value": "@json(item().CopyActivitySettings).translator",
-														"type": "Expression"
-													}
-												},
-												"inputs": [
-													{
-														"referenceName": "weatherdailyforecast_xf0_SourceDS",
-														"type": "DatasetReference",
-														"parameters": {
-															"cw_relativeUrl": {
-																"value": "@json(item().SourceObjectSettings).relativeUrl",
-																"type": "Expression"
-															}
-														}
-													}
-												],
-												"outputs": [
-													{
-														"referenceName": "weatherdailyforecast_xf0_DestinationDS",
-														"type": "DatasetReference",
-														"parameters": {
-															"cw_schema": {
-																"value": "@json(item().SinkObjectSettings).schema",
-																"type": "Expression"
-															},
-															"cw_table": {
-																"value": "@json(item().SinkObjectSettings).table",
-																"type": "Expression"
-															}
-														}
-													}
-												]
-											}
-										]
-									}
-								}
-							]
-						}
-					}
-				],
-				"parameters": {
-					"ObjectsPerGroupToCopy": {
-						"type": "Array"
-					}
-				},
-				"folder": {
-					"name": "weatherdailyforecast_xf0_20210729"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-07-29T11:15:16Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/weatherdailyforecast_xf0_DestinationDS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GetTableListAndTriggerCopyData')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "LookupTableList",
-						"description": "Retrieve the table list from my database for Description",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT  [SCHEMA]  TABLE_SCHEMA,\n[sname] [TABLE_NAME]\n      \n      \n  FROM [H21_STAGING].[dbo].[mload]",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "SqlServerTableBSource",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "TriggerCopy",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "LookupTableList",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "IterateAndCopySQLTables",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": false,
-							"parameters": {
-								"tableList": {
-									"value": "@activity('LookupTableList').output.value",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2021-08-03T14:33:56Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTableBSource')]",
-				"[concat(variables('factoryId'), '/pipelines/IterateAndCopySQLTables')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask2_vj9_TopLevel')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "This pipeline will count the total number of objects (tables etc.) required to be copied in this run, come up with the number of sequential batches based on the max allowed concurrent copy task, and then execute another pipeline to copy different batches sequentially.",
-				"activities": [
-					{
-						"name": "GetSumOfObjectsToCopy",
-						"description": "Count the total number of objects (tables etc.) required to be copied in this run.",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "SqlServerSource",
-								"sqlReaderQuery": {
-									"value": "SELECT count(*) as count FROM @{pipeline().parameters.MainControlTableName} where TopLevelPipelineName='@{pipeline().Pipeline}' and TriggerName like '%@{pipeline().TriggerName}%'",
-									"type": "Expression"
-								},
-								"partitionOption": "None"
-							},
-							"dataset": {
-								"referenceName": "MetadataDrivenCopyTask2_vj9_ControlDS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "CopyBatchesOfObjectsSequentially",
-						"description": "Come up with the number of sequential batches based on the max allowed concurrent copy tasks, and then execute another pipeline to copy different batches sequentially.",
-						"type": "ForEach",
-						"dependsOn": [
-							{
-								"activity": "GetSumOfObjectsToCopy",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@range(0, add(div(activity('GetSumOfObjectsToCopy').output.firstRow.count,\n                    pipeline().parameters.MaxNumberOfConcurrentTasks),\n                    if(equals(mod(activity('GetSumOfObjectsToCopy').output.firstRow.count,\n                    pipeline().parameters.MaxNumberOfConcurrentTasks), 0), 0, 1)))",
-								"type": "Expression"
-							},
-							"isSequential": true,
-							"activities": [
-								{
-									"name": "CopyObjectsInOneBtach",
-									"description": "Execute another pipeline to copy one batch of objects. The objects belonging to this batch will be copied parallelly.",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "MetadataDrivenCopyTask2_vj9_MiddleLevel",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": true,
-										"parameters": {
-											"MaxNumberOfObjectsReturnedFromLookupActivity": {
-												"value": "@pipeline().parameters.MaxNumberOfObjectsReturnedFromLookupActivity",
-												"type": "Expression"
-											},
-											"TopLevelPipelineName": {
-												"value": "@{pipeline().Pipeline}",
-												"type": "Expression"
-											},
-											"TriggerName": {
-												"value": "@{pipeline().TriggerName}",
-												"type": "Expression"
-											},
-											"CurrentSequentialNumberOfBatch": {
-												"value": "@item()",
-												"type": "Expression"
-											},
-											"SumOfObjectsToCopy": {
-												"value": "@activity('GetSumOfObjectsToCopy').output.firstRow.count",
-												"type": "Expression"
-											},
-											"SumOfObjectsToCopyForCurrentBatch": {
-												"value": "@min(pipeline().parameters.MaxNumberOfConcurrentTasks, activity('GetSumOfObjectsToCopy').output.firstRow.count)",
-												"type": "Expression"
-											},
-											"MainControlTableName": {
-												"value": "@pipeline().parameters.MainControlTableName",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							]
-						}
-					}
-				],
-				"parameters": {
-					"MaxNumberOfObjectsReturnedFromLookupActivity": {
-						"type": "Int",
-						"defaultValue": 5000
-					},
-					"MaxNumberOfConcurrentTasks": {
-						"type": "Int",
-						"defaultValue": 20
-					},
-					"MainControlTableName": {
-						"type": "String",
-						"defaultValue": "[AzureMetaDataControl].testazcontrol.MainControlTable_vj9"
-					}
-				},
-				"folder": {
-					"name": "MetadataDrivenCopyTask2_vj9_20210728"
-				},
-				"annotations": [
-					"MetadataDrivenSolution"
-				],
-				"lastPublishTime": "2021-07-28T14:23:42Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/MetadataDrivenCopyTask2_vj9_MiddleLevel')]"
+				"[concat(variables('factoryId'), '/datasets/SqlServerTable2')]"
 			]
 		}
 	]

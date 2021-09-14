@@ -1,0 +1,438 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "PRAVEEN-DF21"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline2_workerposts-dataflow')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "dataflow4",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow4",
+								"type": "DataFlowReference"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/dataflow4')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText8')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "zellis-rl"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Json15')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "rt",
+						"container": "zellis-rl"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"WorkerNumber": {
+							"type": "string"
+						},
+						"PayGroupId": {
+							"type": "integer"
+						},
+						"ProbationPassedDate": {
+							"type": "string"
+						},
+						"TitleId": {
+							"type": "integer"
+						},
+						"PreviousSurname": {
+							"type": "string"
+						},
+						"OtherForenames": {
+							"type": "string"
+						},
+						"ReligionId": {
+							"type": "integer"
+						},
+						"EmployeeTypeId": {
+							"type": "integer"
+						},
+						"FirstForename": {
+							"type": "string"
+						},
+						"PayMethodId": {
+							"type": "integer"
+						},
+						"OriginalJoinReasonId": {
+							"type": "integer"
+						},
+						"WorkTelephoneNumber": {
+							"type": "string"
+						},
+						"PersonalEmail": {
+							"type": "string"
+						},
+						"AddressId": {
+							"type": "integer"
+						},
+						"LastPaidDate": {
+							"type": "string"
+						},
+						"OriginalStartDate": {
+							"type": "string"
+						},
+						"LastPaidYear": {
+							"type": "string"
+						},
+						"Surname": {
+							"type": "string"
+						},
+						"KnownAs": {
+							"type": "string"
+						},
+						"CurrentJoinReasonId": {
+							"type": "integer"
+						},
+						"HomeTelephoneNumber": {
+							"type": "string"
+						},
+						"CurrentStartDate": {
+							"type": "string"
+						},
+						"DeathDate": {
+							"type": "string"
+						},
+						"MaritalStatusEffectiveDate": {
+							"type": "string"
+						},
+						"LegislationTypeId": {
+							"type": "integer"
+						},
+						"BusinessEmail": {
+							"type": "string"
+						},
+						"WorkerId": {
+							"type": "integer"
+						},
+						"EthnicOriginId": {
+							"type": "integer"
+						},
+						"Initials": {
+							"type": "string"
+						},
+						"PayGroupEffectiveDate": {
+							"type": "string"
+						},
+						"GenderId": {
+							"type": "integer"
+						},
+						"LanguageId": {
+							"type": "integer"
+						},
+						"BirthDate": {
+							"type": "string"
+						},
+						"NationalInsuranceNo": {
+							"type": "string"
+						},
+						"CountryOfBirthId": {
+							"type": "integer"
+						},
+						"MaritalStatusId": {
+							"type": "integer"
+						},
+						"IsCurrent": {
+							"type": "boolean"
+						},
+						"WorkTelephoneExtension": {
+							"type": "string"
+						},
+						"LeaveReasonId": {
+							"type": "integer"
+						},
+						"BankAccountId": {
+							"type": "integer"
+						},
+						"LeaveDate": {
+							"type": "string"
+						},
+						"MobileTelephoneNumber": {
+							"type": "string"
+						},
+						"LastPaidPeriod": {
+							"type": "string"
+						},
+						"ControlGroupId": {
+							"type": "integer"
+						},
+						"Age": {
+							"type": "integer"
+						},
+						"TemporaryPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPosts": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Gender": {
+							"type": "object"
+						},
+						"CurrentMainWorkerPost": {
+							"type": "object"
+						},
+						"EthnicOrigin": {
+							"type": "object"
+						},
+						"OperatorProfileToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerParentalLeave": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Title": {
+							"type": "object"
+						},
+						"WorkerPayPeriods": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"ControlGroup": {
+							"type": "object"
+						},
+						"OriginalJoinReason": {
+							"type": "object"
+						},
+						"CountryOfBirth": {
+							"type": "object"
+						},
+						"PayMethod": {
+							"type": "object"
+						},
+						"CurrentYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PeriodOnPeriodYTDs": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"BankAccount": {
+							"type": "object"
+						},
+						"WorkerUSCDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerTaxCodeHistories": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"Address": {
+							"type": "object"
+						},
+						"ReportingLevels": {
+							"type": "object"
+						},
+						"UserSecurityToWorkers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPRSIDetails": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerPensionSchemes": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"PayGroup": {
+							"type": "object"
+						},
+						"Religion": {
+							"type": "object"
+						},
+						"AbsenceEntitlements": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"CurrentJoinReason": {
+							"type": "object"
+						},
+						"WorkerCostingData": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"EmployeeType": {
+							"type": "object"
+						},
+						"LeaveReason": {
+							"type": "object"
+						},
+						"LegislationType": {
+							"type": "object"
+						},
+						"AbsenceHeaders": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"MaritalStatus": {
+							"type": "object"
+						},
+						"Managers": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"FixedPayments": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						},
+						"WorkerBenefits": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow4')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Json15",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DelimitedText8",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Flatten1"
+						}
+					],
+					"script": "source(output(\n\t\tWorkerNumber as string,\n\t\tPayGroupId as integer,\n\t\tProbationPassedDate as string,\n\t\tTitleId as integer,\n\t\tPreviousSurname as string,\n\t\tOtherForenames as string,\n\t\tReligionId as integer,\n\t\tEmployeeTypeId as integer,\n\t\tFirstForename as string,\n\t\tPayMethodId as integer,\n\t\tOriginalJoinReasonId as integer,\n\t\tWorkTelephoneNumber as string,\n\t\tPersonalEmail as string,\n\t\tAddressId as integer,\n\t\tLastPaidDate as string,\n\t\tOriginalStartDate as string,\n\t\tLastPaidYear as string,\n\t\tSurname as string,\n\t\tKnownAs as string,\n\t\tCurrentJoinReasonId as integer,\n\t\tHomeTelephoneNumber as string,\n\t\tCurrentStartDate as string,\n\t\tDeathDate as string,\n\t\tMaritalStatusEffectiveDate as string,\n\t\tLegislationTypeId as integer,\n\t\tBusinessEmail as string,\n\t\tWorkerId as integer,\n\t\tEthnicOriginId as integer,\n\t\tInitials as string,\n\t\tPayGroupEffectiveDate as string,\n\t\tGenderId as integer,\n\t\tLanguageId as integer,\n\t\tBirthDate as string,\n\t\tNationalInsuranceNo as string,\n\t\tCountryOfBirthId as integer,\n\t\tMaritalStatusId as integer,\n\t\tIsCurrent as boolean,\n\t\tWorkTelephoneExtension as string,\n\t\tLeaveReasonId as integer,\n\t\tBankAccountId as integer,\n\t\tLeaveDate as string,\n\t\tMobileTelephoneNumber as string,\n\t\tLastPaidPeriod as string,\n\t\tControlGroupId as integer,\n\t\tAge as integer,\n\t\tTemporaryPayments as ({} as string)[],\n\t\tWorkerPosts as ({} as string)[],\n\t\tGender as ({} as string),\n\t\tCurrentMainWorkerPost as ({} as string),\n\t\tEthnicOrigin as ({} as string),\n\t\tOperatorProfileToWorkers as ({} as string)[],\n\t\tWorkerParentalLeave as ({} as string)[],\n\t\tTitle as ({} as string),\n\t\tWorkerPayPeriods as ({} as string)[],\n\t\tControlGroup as ({} as string),\n\t\tOriginalJoinReason as ({} as string),\n\t\tCountryOfBirth as ({} as string),\n\t\tPayMethod as ({} as string),\n\t\tCurrentYTDs as ({} as string)[],\n\t\tPeriodOnPeriodYTDs as ({} as string)[],\n\t\tBankAccount as ({} as string),\n\t\tWorkerUSCDetails as ({} as string)[],\n\t\tWorkerTaxCodeHistories as ({} as string)[],\n\t\tAddress as ({} as string),\n\t\tReportingLevels as ({} as string),\n\t\tUserSecurityToWorkers as ({} as string)[],\n\t\tWorkerPRSIDetails as ({} as string)[],\n\t\tWorkerPensionSchemes as ({} as string)[],\n\t\tPayGroup as ({} as string),\n\t\tReligion as ({} as string),\n\t\tAbsenceEntitlements as ({} as string)[],\n\t\tCurrentJoinReason as ({} as string),\n\t\tWorkerCostingData as ({} as string)[],\n\t\tEmployeeType as ({} as string),\n\t\tLeaveReason as ({} as string),\n\t\tLegislationType as ({} as string),\n\t\tAbsenceHeaders as ({} as string)[],\n\t\tMaritalStatus as ({} as string),\n\t\tManagers as ({} as string)[],\n\t\tFixedPayments as ({} as string)[],\n\t\tWorkerBenefits as ({} as string)[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments',\n\tbackslashEscape: true) ~> source1\nsource1 foldDown(unroll(TemporaryPayments, TemporaryPayments),\n\tmapColumn(\n\t\ttp = TemporaryPayments.{},\n\t\tWorkerNumber,\n\t\tPreviousSurname,\n\t\tFirstForename\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Json15')]",
+				"[concat(variables('factoryId'), '/datasets/DelimitedText8')]"
+			]
+		}
+	]
+}
