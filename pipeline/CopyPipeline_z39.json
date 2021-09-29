@@ -50,13 +50,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_z39",
+						"referenceName": "Json13",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_z39",
+						"referenceName": "Json14",
 						"type": "DatasetReference"
 					}
 				]
