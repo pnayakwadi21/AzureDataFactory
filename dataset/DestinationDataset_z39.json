@@ -1,0 +1,19 @@
+{
+	"name": "DestinationDataset_z39",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDf",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "zeworkpost",
+				"container": "praveen-container"
+			}
+		},
+		"schema": {}
+	}
+}
