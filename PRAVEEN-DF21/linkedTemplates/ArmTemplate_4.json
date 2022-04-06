@@ -1208,7 +1208,7 @@
 							"waitOnCompletion": true,
 							"parameters": {
 								"tablelist": {
-									"value": "@activity('Lookup1').output",
+									"value": "@activity('Lookup1').output.value",
 									"type": "Expression"
 								}
 							}
