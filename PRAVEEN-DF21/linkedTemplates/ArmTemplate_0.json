@@ -116,6 +116,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"msa": {
 						"type": "array"
@@ -341,6 +345,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"mjson": {
 						"type": "array"
@@ -479,7 +487,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText8')]",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText9')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -498,7 +506,20 @@
 					"escapeChar": "\\",
 					"quoteChar": "\""
 				},
-				"schema": []
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureStorageLinkedService')]"

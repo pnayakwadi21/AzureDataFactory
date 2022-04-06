@@ -13,6 +13,112 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_esm_DestinationDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedServiceSqlControl",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_table": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_esm_20210730"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"table": {
+						"value": "@dataset().cw_table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_ControlDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedServiceSqlControl",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_z88_20210730"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "Weather",
+					"table": "DynamicLoad"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_DestinationDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "linkedServiceSqlControl",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_schema": {
+						"type": "String"
+					},
+					"cw_table": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_z88_20210730"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": {
+						"value": "@dataset().cw_schema",
+						"type": "Expression"
+					},
+					"table": {
+						"value": "@dataset().cw_table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_j6k')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerH21",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "dftest"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerTable1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -54,6 +160,38 @@
 						"value": "@dataset().tablename",
 						"type": "Expression"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerTable3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerStagingList",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "sname",
+						"type": "varchar"
+					},
+					{
+						"name": "dname",
+						"type": "varchar"
+					},
+					{
+						"name": "SCHEMA",
+						"type": "char"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "mload"
 				}
 			},
 			"dependsOn": []
@@ -285,48 +423,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/dataflow4')]",
-			"type": "Microsoft.DataFactory/factories/dataflows",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"dataset": {
-								"referenceName": "Json15",
-								"type": "DatasetReference"
-							},
-							"name": "source1"
-						}
-					],
-					"sinks": [
-						{
-							"dataset": {
-								"referenceName": "DelimitedText8",
-								"type": "DatasetReference"
-							},
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "Flatten1"
-						}
-					],
-					"script": "source(output(\n\t\tWorkerNumber as string,\n\t\tPayGroupId as integer,\n\t\tProbationPassedDate as string,\n\t\tTitleId as integer,\n\t\tPreviousSurname as string,\n\t\tOtherForenames as string,\n\t\tReligionId as integer,\n\t\tEmployeeTypeId as integer,\n\t\tFirstForename as string,\n\t\tPayMethodId as integer,\n\t\tOriginalJoinReasonId as integer,\n\t\tWorkTelephoneNumber as string,\n\t\tPersonalEmail as string,\n\t\tAddressId as integer,\n\t\tLastPaidDate as string,\n\t\tOriginalStartDate as string,\n\t\tLastPaidYear as string,\n\t\tSurname as string,\n\t\tKnownAs as string,\n\t\tCurrentJoinReasonId as integer,\n\t\tHomeTelephoneNumber as string,\n\t\tCurrentStartDate as string,\n\t\tDeathDate as string,\n\t\tMaritalStatusEffectiveDate as string,\n\t\tLegislationTypeId as integer,\n\t\tBusinessEmail as string,\n\t\tWorkerId as integer,\n\t\tEthnicOriginId as integer,\n\t\tInitials as string,\n\t\tPayGroupEffectiveDate as string,\n\t\tGenderId as integer,\n\t\tLanguageId as integer,\n\t\tBirthDate as string,\n\t\tNationalInsuranceNo as string,\n\t\tCountryOfBirthId as integer,\n\t\tMaritalStatusId as integer,\n\t\tIsCurrent as boolean,\n\t\tWorkTelephoneExtension as string,\n\t\tLeaveReasonId as integer,\n\t\tBankAccountId as integer,\n\t\tLeaveDate as string,\n\t\tMobileTelephoneNumber as string,\n\t\tLastPaidPeriod as string,\n\t\tControlGroupId as integer,\n\t\tAge as integer,\n\t\tTemporaryPayments as ({} as string)[],\n\t\tWorkerPosts as ({} as string)[],\n\t\tGender as ({} as string),\n\t\tCurrentMainWorkerPost as ({} as string),\n\t\tEthnicOrigin as ({} as string),\n\t\tOperatorProfileToWorkers as ({} as string)[],\n\t\tWorkerParentalLeave as ({} as string)[],\n\t\tTitle as ({} as string),\n\t\tWorkerPayPeriods as ({} as string)[],\n\t\tControlGroup as ({} as string),\n\t\tOriginalJoinReason as ({} as string),\n\t\tCountryOfBirth as ({} as string),\n\t\tPayMethod as ({} as string),\n\t\tCurrentYTDs as ({} as string)[],\n\t\tPeriodOnPeriodYTDs as ({} as string)[],\n\t\tBankAccount as ({} as string),\n\t\tWorkerUSCDetails as ({} as string)[],\n\t\tWorkerTaxCodeHistories as ({} as string)[],\n\t\tAddress as ({} as string),\n\t\tReportingLevels as ({} as string),\n\t\tUserSecurityToWorkers as ({} as string)[],\n\t\tWorkerPRSIDetails as ({} as string)[],\n\t\tWorkerPensionSchemes as ({} as string)[],\n\t\tPayGroup as ({} as string),\n\t\tReligion as ({} as string),\n\t\tAbsenceEntitlements as ({} as string)[],\n\t\tCurrentJoinReason as ({} as string),\n\t\tWorkerCostingData as ({} as string)[],\n\t\tEmployeeType as ({} as string),\n\t\tLeaveReason as ({} as string),\n\t\tLegislationType as ({} as string),\n\t\tAbsenceHeaders as ({} as string)[],\n\t\tMaritalStatus as ({} as string),\n\t\tManagers as ({} as string)[],\n\t\tFixedPayments as ({} as string)[],\n\t\tWorkerBenefits as ({} as string)[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'arrayOfDocuments',\n\tbackslashEscape: true) ~> source1\nsource1 foldDown(unroll(TemporaryPayments, TemporaryPayments),\n\tmapColumn(\n\t\ttp = TemporaryPayments.{},\n\t\tWorkerNumber,\n\t\tPreviousSurname,\n\t\tFirstForename\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_j6k')]",
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_b3o')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_j6k",
+						"name": "Copy_b3o",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -339,50 +442,93 @@
 						"userProperties": [
 							{
 								"name": "Source",
-								"value": "dbo.dftest"
+								"value": "zellis-rl//rt"
 							},
 							{
 								"name": "Destination",
-								"value": "praveen-container//dflowsrc"
+								"value": "dbo.post"
 							}
 						],
 						"typeProperties": {
 							"source": {
-								"type": "SqlServerSource",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
+								"type": "JsonSource",
 								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"type": "JsonReadSettings"
 								}
 							},
+							"sink": {
+								"type": "SqlServerSink",
+								"tableOption": "autoCreate"
+							},
 							"enableStaging": false,
-							"validateDataConsistency": false
+							"validateDataConsistency": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['WorkerNumber']"
+										},
+										"sink": {
+											"name": "WorkerNumber"
+										}
+									},
+									{
+										"source": {
+											"path": "$['FirstForename']"
+										},
+										"sink": {
+											"name": "FirstForename"
+										}
+									},
+									{
+										"source": {
+											"path": "$['WorkTelephoneExtension']"
+										},
+										"sink": {
+											"name": "WorkTelephoneExtension",
+											"type": "Int64"
+										}
+									},
+									{
+										"source": {
+											"path": "$['WorkerPayPeriods']"
+										},
+										"sink": {
+											"name": "WorkerPayPeriods",
+											"type": "String"
+										}
+									}
+								],
+								"mapComplexValuesToString": true
+							}
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_j6k",
+								"referenceName": "SourceDataset_b3o",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_j6k",
+								"referenceName": "DestinationDataset_b3o",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					}
 				],
-				"annotations": [],
-				"lastPublishTime": "2021-08-09T12:35:37Z"
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -422,8 +568,8 @@
 							},
 							"sink": {
 								"type": "SqlServerSink",
-								"tableOption": "autoCreate",
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"tableOption": "autoCreate"
 							},
 							"enableStaging": false,
 							"validateDataConsistency": false,
@@ -602,6 +748,10 @@
 						]
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"annotations": [],
 				"lastPublishTime": "2021-07-29T10:22:00Z"
 			},
@@ -652,8 +802,8 @@
 												"value": "IF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}])TRUNCATE TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
 												"type": "Expression"
 											},
-											"tableOption": "autoCreate",
-											"writeBehavior": "insert"
+											"writeBehavior": "insert",
+											"tableOption": "autoCreate"
 										},
 										"enableStaging": true,
 										"stagingSettings": {
@@ -696,6 +846,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"tableList": {
 						"type": "array"
@@ -791,6 +945,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"MaxNumberOfObjectsReturnedFromLookupActivity": {
 						"type": "Int"
@@ -900,13 +1058,16 @@
 																	"value": "@json(item().CopySinkSettings).preCopyScript",
 																	"type": "Expression"
 																},
+																"writeBehavior": {
+																	"value": "@json(item().CopySinkSettings).writeBehavior",
+																	"type": "Expression"
+																},
+																"upsertSettings": {
+																	"useTempDB": true
+																},
 																"tableOption": {
 																	"value": "@json(item().CopySinkSettings).tableOption",
 																	"type": "Expression"
-																},
-																"writeBehavior": {
-																	"type": "Expression",
-																	"value": "@json(item().CopySinkSettings).writeBehavior"
 																}
 															},
 															"enableStaging": false,
@@ -989,13 +1150,16 @@
 															"value": "@json(item().CopySinkSettings).preCopyScript",
 															"type": "Expression"
 														},
+														"writeBehavior": {
+															"value": "@json(item().CopySinkSettings).writeBehavior",
+															"type": "Expression"
+														},
+														"upsertSettings": {
+															"useTempDB": true
+														},
 														"tableOption": {
 															"value": "@json(item().CopySinkSettings).tableOption",
 															"type": "Expression"
-														},
-														"writeBehavior": {
-															"type": "Expression",
-															"value": "@json(item().CopySinkSettings).writeBehavior"
 														}
 													},
 													"enableStaging": false,
@@ -1037,6 +1201,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"ObjectsPerGroupToCopy": {
 						"type": "Array"
@@ -1048,7 +1216,9 @@
 				"annotations": [],
 				"lastPublishTime": "2021-07-30T09:14:36Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/MetadataDrivenCopyTask_esm_DestinationDS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_BottomLevel')]",
@@ -1135,13 +1305,16 @@
 																	"value": "@json(item().CopySinkSettings).preCopyScript",
 																	"type": "Expression"
 																},
+																"writeBehavior": {
+																	"value": "@json(item().CopySinkSettings).writeBehavior",
+																	"type": "Expression"
+																},
+																"upsertSettings": {
+																	"useTempDB": true
+																},
 																"tableOption": {
 																	"value": "@json(item().CopySinkSettings).tableOption",
 																	"type": "Expression"
-																},
-																"writeBehavior": {
-																	"type": "Expression",
-																	"value": "@json(item().CopySinkSettings).writeBehavior"
 																}
 															},
 															"enableStaging": false,
@@ -1235,13 +1408,16 @@
 															"value": "@json(item().CopySinkSettings).preCopyScript",
 															"type": "Expression"
 														},
+														"writeBehavior": {
+															"value": "@json(item().CopySinkSettings).writeBehavior",
+															"type": "Expression"
+														},
+														"upsertSettings": {
+															"useTempDB": true
+														},
 														"tableOption": {
 															"value": "@json(item().CopySinkSettings).tableOption",
 															"type": "Expression"
-														},
-														"writeBehavior": {
-															"type": "Expression",
-															"value": "@json(item().CopySinkSettings).writeBehavior"
 														}
 													},
 													"enableStaging": false,
@@ -1287,6 +1463,10 @@
 						}
 					}
 				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
 				"parameters": {
 					"ObjectsPerGroupToCopy": {
 						"type": "Array"
@@ -1298,281 +1478,8 @@
 				"annotations": [],
 				"lastPublishTime": "2021-07-30T11:25:30Z"
 			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestTest')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.tableapi",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "RestSource",
-											"httpRequestTimeout": "00:01:40",
-											"requestInterval": "00.00:00:00.010",
-											"requestMethod": "GET"
-										},
-										"sink": {
-											"type": "SqlServerSink",
-											"tableOption": "autoCreate"
-										},
-										"enableStaging": false,
-										"translator": {
-											"value": "@json(item().cref)",
-											"type": "Expression"
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "RestResource1",
-											"type": "DatasetReference",
-											"parameters": {
-												"BaseUrl": {
-													"value": "@item().apiref",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "SqlServerTable2",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablename": {
-													"value": "@item().desttable",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"parameters": {
-					"tableapi": {
-						"type": "array"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-08-09T09:35:42Z"
-			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "dataflow2",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dataflow2",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"source2": {},
-									"sink1": {},
-									"sink2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2021-09-02T13:51:28Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2_workerposts-dataflow')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "dataflow4",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "dataflow4",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/dataflow4')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2rest')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ForEach1",
-						"type": "ForEach",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.tlist",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Copy data1",
-									"type": "Copy",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "7.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "RestSource",
-											"httpRequestTimeout": "00:01:40",
-											"requestInterval": "00.00:00:00.010",
-											"requestMethod": "GET"
-										},
-										"sink": {
-											"type": "SqlServerSink",
-											"tableOption": "autoCreate"
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"path": "[['description']"
-													},
-													"sink": {
-														"name": "description",
-														"type": "String"
-													}
-												}
-											],
-											"collectionReference": "$['alerts']",
-											"mapComplexValuesToString": false
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "RestResource1",
-											"type": "DatasetReference",
-											"parameters": {
-												"BaseUrl": {
-													"value": "@item().apiref",
-													"type": "Expression"
-												}
-											}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "SqlServerTable2",
-											"type": "DatasetReference",
-											"parameters": {
-												"tablename": {
-													"value": "@item().desttable",
-													"type": "Expression"
-												}
-											}
-										}
-									]
-								}
-							]
-						}
-					}
-				],
-				"parameters": {
-					"tlist": {
-						"type": "array"
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-08-06T14:57:24Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable2')]"
+				"[concat(variables('factoryId'), '/datasets/MetadataDrivenCopyTask_z88_DestinationDS')]"
 			]
 		}
 	]
