@@ -3193,11 +3193,12 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT  [SCHEMA]  TABLE_SCHEMA,\n[sname] [TABLE_NAME]\n      \n      \n  FROM [H21_STAGING].[dbo].[mload]",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "SqlServerTable3",
+								"referenceName": "SqlServerTableBSource",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -3238,7 +3239,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SqlServerTable3')]",
+				"[concat(variables('factoryId'), '/datasets/SqlServerTableBSource')]",
 				"[concat(variables('factoryId'), '/pipelines/pipeline3')]"
 			]
 		},
