@@ -40,16 +40,20 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"waitOnCompletion": true
+					"pipeline": {
+						"referenceName": "pipeline3",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"tablelist": {
+							"value": "@activity('Lookup1').output",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
-		"parameters": {
-			"tablelist": {
-				"type": "array",
-				"defaultValue": "@activity('Lookup1').output.value"
-			}
-		},
 		"annotations": []
 	}
 }
