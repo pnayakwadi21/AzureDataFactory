@@ -1,10 +1,9 @@
 {
-	"name": "CopyPipeline_amk",
+	"name": "CopyPipeline_b3o",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_amk",
-
+				"name": "Copy_b3o",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -17,11 +16,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "praveen-container//jsonmultiarraylknkk.json"
+						"value": "zellis-rl//rt"
 					},
 					{
 						"name": "Destination",
-						"value": "filo//"
+						"value": "dbo.post"
 					}
 				],
 				"typeProperties": {
@@ -37,14 +36,8 @@
 						}
 					},
 					"sink": {
-						"type": "JsonSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "JsonWriteSettings",
-							"filePattern": "arrayOfObjects"
-						}
+						"type": "SqlServerSink",
+						"tableOption": "autoCreate"
 					},
 					"enableStaging": false,
 					"validateDataConsistency": false,
@@ -53,55 +46,56 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['returnReference']"
+									"path": "$['WorkerNumber']"
 								},
 								"sink": {
-									"path": "$['returnReference']"
+									"name": "WorkerNumber"
 								}
 							},
 							{
 								"source": {
-									"path": "$['orderReference']"
+									"path": "$['FirstForename']"
 								},
 								"sink": {
-									"path": "$['orderReference']"
+									"name": "FirstForename"
 								}
 							},
 							{
 								"source": {
-									"path": "$['customerId']"
+									"path": "$['WorkTelephoneExtension']"
 								},
 								"sink": {
-									"path": "$['customerId']"
+									"name": "WorkTelephoneExtension",
+									"type": "Int64"
 								}
 							},
 							{
 								"source": {
-									"path": "$['var'][0]['variantId']"
+									"path": "$['WorkerPayPeriods']"
 								},
 								"sink": {
-									"path": "$['variantId']"
+									"name": "WorkerPayPeriods",
+									"type": "String"
 								}
 							}
-						]
+						],
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_amk",
+						"referenceName": "SourceDataset_b3o",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_amk",
+						"referenceName": "DestinationDataset_b3o",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2021-09-09T15:11:59Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

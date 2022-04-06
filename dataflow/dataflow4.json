@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText9",
+
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -26,7 +26,7 @@
 					"name": "Flatten1"
 				}
 			],
-			"script": "source(output(\n\t\tvalue as (WorkerNumber as string, PayGroupId as integer, ProbationPassedDate as string, TitleId as integer, PreviousSurname as string, OtherForenames as string, ReligionId as integer, EmployeeTypeId as integer, FirstForename as string, PayMethodId as integer, OriginalJoinReasonId as integer, WorkTelephoneNumber as string, PersonalEmail as string, AddressId as integer, LastPaidDate as string, OriginalStartDate as string, LastPaidYear as string, Surname as string, KnownAs as string, CurrentJoinReasonId as integer, HomeTelephoneNumber as string, CurrentStartDate as string, DeathDate as string, MaritalStatusEffectiveDate as string, LegislationTypeId as integer, BusinessEmail as string, WorkerId as integer, EthnicOriginId as integer, Initials as string, PayGroupEffectiveDate as string, GenderId as integer, LanguageId as integer, BirthDate as string, NationalInsuranceNo as string, CountryOfBirthId as integer, MaritalStatusId as integer, IsCurrent as boolean, WorkTelephoneExtension as string, LeaveReasonId as integer, BankAccountId as integer, LeaveDate as string, MobileTelephoneNumber as string, LastPaidPeriod as string, ControlGroupId as integer, Age as integer, testcomp as (pvalue as integer)[])[]\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tdocumentForm: 'documentPerLine') ~> source1\nsource1 foldDown(unroll(value.testcomp),\n\tmapColumn(\n\t\tworkernumber = value.WorkerNumber,\n\t\tpvaluecomplex = value.testcomp.pvalue\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+
 		}
 	}
 }

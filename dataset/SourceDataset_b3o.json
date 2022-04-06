@@ -1,0 +1,320 @@
+{
+	"name": "SourceDataset_b3o",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureStorageLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "rt",
+				"container": "zellis-rl"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"WorkerNumber": {
+					"type": "string"
+				},
+				"PayGroupId": {
+					"type": "integer"
+				},
+				"ProbationPassedDate": {
+					"type": "string"
+				},
+				"TitleId": {
+					"type": "integer"
+				},
+				"PreviousSurname": {
+					"type": "string"
+				},
+				"OtherForenames": {
+					"type": "string"
+				},
+				"ReligionId": {
+					"type": "integer"
+				},
+				"EmployeeTypeId": {
+					"type": "integer"
+				},
+				"FirstForename": {
+					"type": "string"
+				},
+				"PayMethodId": {
+					"type": "integer"
+				},
+				"OriginalJoinReasonId": {
+					"type": "integer"
+				},
+				"WorkTelephoneNumber": {
+					"type": "string"
+				},
+				"PersonalEmail": {
+					"type": "string"
+				},
+				"AddressId": {
+					"type": "integer"
+				},
+				"LastPaidDate": {
+					"type": "string"
+				},
+				"OriginalStartDate": {
+					"type": "string"
+				},
+				"LastPaidYear": {
+					"type": "string"
+				},
+				"Surname": {
+					"type": "string"
+				},
+				"KnownAs": {
+					"type": "string"
+				},
+				"CurrentJoinReasonId": {
+					"type": "integer"
+				},
+				"HomeTelephoneNumber": {
+					"type": "string"
+				},
+				"CurrentStartDate": {
+					"type": "string"
+				},
+				"DeathDate": {
+					"type": "string"
+				},
+				"MaritalStatusEffectiveDate": {
+					"type": "string"
+				},
+				"LegislationTypeId": {
+					"type": "integer"
+				},
+				"BusinessEmail": {
+					"type": "string"
+				},
+				"WorkerId": {
+					"type": "integer"
+				},
+				"EthnicOriginId": {
+					"type": "integer"
+				},
+				"Initials": {
+					"type": "string"
+				},
+				"PayGroupEffectiveDate": {
+					"type": "string"
+				},
+				"GenderId": {
+					"type": "integer"
+				},
+				"LanguageId": {
+					"type": "integer"
+				},
+				"BirthDate": {
+					"type": "string"
+				},
+				"NationalInsuranceNo": {
+					"type": "string"
+				},
+				"CountryOfBirthId": {
+					"type": "integer"
+				},
+				"MaritalStatusId": {
+					"type": "integer"
+				},
+				"IsCurrent": {
+					"type": "boolean"
+				},
+				"WorkTelephoneExtension": {
+					"type": "string"
+				},
+				"LeaveReasonId": {
+					"type": "integer"
+				},
+				"BankAccountId": {
+					"type": "integer"
+				},
+				"LeaveDate": {
+					"type": "string"
+				},
+				"MobileTelephoneNumber": {
+					"type": "string"
+				},
+				"LastPaidPeriod": {
+					"type": "string"
+				},
+				"ControlGroupId": {
+					"type": "integer"
+				},
+				"Age": {
+					"type": "integer"
+				},
+				"TemporaryPayments": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerPosts": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"Gender": {
+					"type": "object"
+				},
+				"CurrentMainWorkerPost": {
+					"type": "object"
+				},
+				"EthnicOrigin": {
+					"type": "object"
+				},
+				"OperatorProfileToWorkers": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerParentalLeave": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"Title": {
+					"type": "object"
+				},
+				"WorkerPayPeriods": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"ControlGroup": {
+					"type": "object"
+				},
+				"OriginalJoinReason": {
+					"type": "object"
+				},
+				"CountryOfBirth": {
+					"type": "object"
+				},
+				"PayMethod": {
+					"type": "object"
+				},
+				"CurrentYTDs": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"PeriodOnPeriodYTDs": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"BankAccount": {
+					"type": "object"
+				},
+				"WorkerUSCDetails": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerTaxCodeHistories": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"Address": {
+					"type": "object"
+				},
+				"ReportingLevels": {
+					"type": "object"
+				},
+				"UserSecurityToWorkers": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerPRSIDetails": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerPensionSchemes": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"PayGroup": {
+					"type": "object"
+				},
+				"Religion": {
+					"type": "object"
+				},
+				"AbsenceEntitlements": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"CurrentJoinReason": {
+					"type": "object"
+				},
+				"WorkerCostingData": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"EmployeeType": {
+					"type": "object"
+				},
+				"LeaveReason": {
+					"type": "object"
+				},
+				"LegislationType": {
+					"type": "object"
+				},
+				"AbsenceHeaders": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"MaritalStatus": {
+					"type": "object"
+				},
+				"Managers": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"FixedPayments": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				},
+				"WorkerBenefits": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					}
+				}
+			}
+		}
+	}
+}
