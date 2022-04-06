@@ -1,8 +1,8 @@
 {
-	"name": "DelimitedText8",
+	"name": "DestinationDataset_k2m",
 	"properties": {
 		"linkedServiceName": {
-
+			"referenceName": "AzureBlobStorageDf",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,12 +10,13 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "zellis-rl"
+				"fileName": "commadel",
+				"container": "filo"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
-
+		"schema": []
 	}
 }

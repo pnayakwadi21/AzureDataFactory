@@ -1,8 +1,8 @@
 {
-	"name": "Json12",
+	"name": "DestinationDataset_z39",
 	"properties": {
 		"linkedServiceName": {
-
+			"referenceName": "AzureBlobStorageDf",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,16 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-
+				"fileName": "zeeewrrtyhbtybhhhj",
+				"container": "filo"
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-
-					}
-				}
-			}
-		}
+		"schema": {}
 	}
 }

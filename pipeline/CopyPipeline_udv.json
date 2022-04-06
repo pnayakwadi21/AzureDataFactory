@@ -1,9 +1,9 @@
 {
-	"name": "CopyPipeline_j6k",
+	"name": "CopyPipeline_udv",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_j6k",
+				"name": "Copy_udv",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,27 +16,33 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "dbo.dftest"
+						"value": "zellis-rl//zeworkerposts.json"
 					},
 					{
 						"name": "Destination",
-						"value": "praveen-container//dflowsrc"
+						"value": "filo//"
 					}
 				],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
-						"partitionOption": "None"
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobStorageWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
 						}
 					},
 					"enableStaging": false,
@@ -44,20 +50,18 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_j6k",
+						"referenceName": "SourceDataset_udv",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_j6k",
+						"referenceName": "DestinationDataset_udv",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2021-08-09T12:35:37Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

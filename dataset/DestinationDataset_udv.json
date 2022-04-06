@@ -1,8 +1,8 @@
 {
-	"name": "Json12",
+	"name": "DestinationDataset_udv",
 	"properties": {
 		"linkedServiceName": {
-
+			"referenceName": "AzureBlobStorageDf",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,16 +10,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-
+				"container": "filo"
 			}
 		},
-		"schema": {
-			"type": "object",
-			"properties": {
-
-					}
-				}
-			}
-		}
+		"schema": {}
 	}
 }

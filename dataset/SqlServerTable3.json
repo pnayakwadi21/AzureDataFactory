@@ -1,0 +1,29 @@
+{
+	"name": "SqlServerTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerStagingList",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "sname",
+				"type": "varchar"
+			},
+			{
+				"name": "dname",
+				"type": "varchar"
+			},
+			{
+				"name": "SCHEMA",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "mload"
+		}
+	}
+}

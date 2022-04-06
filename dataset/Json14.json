@@ -2,7 +2,7 @@
 	"name": "Json14",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureStorageLinkedService",
+
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,10 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "rt",
-				"container": "zellis-rl"
-			}
-		},
-		"schema": {}
+
 	}
 }
