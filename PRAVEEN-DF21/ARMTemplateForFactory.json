@@ -3221,7 +3221,7 @@
 								"referenceName": "pipeline3",
 								"type": "PipelineReference"
 							},
-							"waitOnCompletion": true,
+							"waitOnCompletion": false,
 							"parameters": {
 								"tablelist": {
 									"value": "@activity('Lookup1').output.value",
