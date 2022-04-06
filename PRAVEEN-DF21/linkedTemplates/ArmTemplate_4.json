@@ -366,8 +366,8 @@
 											"referenceName": "SqlServerTableBDest",
 											"type": "DatasetReference",
 											"parameters": {
-												"DWTableName": "@item.TABLE_NAME",
-												"DWSchema": "@item.TABLE_SCHEMA"
+												"DWTableName": "@item().TABLE_NAME",
+												"DWSchema": "@item().TABLE_SCHEMA"
 											}
 										}
 									]
