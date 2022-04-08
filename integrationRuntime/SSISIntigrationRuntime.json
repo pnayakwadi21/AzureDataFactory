@@ -13,6 +13,11 @@
 			"ssisProperties": {
 				"catalogInfo": {
 					"catalogServerEndpoint": "ssisdbcata.database.windows.net",
+					"catalogAdminUserName": "nayakwadip",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
 					"catalogPricingTier": "S1"
 				},
 				"edition": "Standard",
