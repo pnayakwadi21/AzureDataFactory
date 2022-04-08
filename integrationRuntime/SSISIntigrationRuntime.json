@@ -1,0 +1,23 @@
+{
+	"name": "SSISIntigrationRuntime",
+	"properties": {
+		"type": "Managed",
+		"description": "SSISIntigrationRuntime",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "UK South",
+				"nodeSize": "Standard_D8_v3",
+				"numberOfNodes": 2,
+				"maxParallelExecutionsPerNode": 8
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "ssisdbcata.database.windows.net",
+					"catalogPricingTier": "S1"
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded"
+			}
+		}
+	}
+}
