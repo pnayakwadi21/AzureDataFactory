@@ -98,6 +98,14 @@
 		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
 			"type": "secureString"
 		},
+		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
+			"type": "string",
+			"defaultValue": "filo"
+		},
+		"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
+			"type": "string",
+			"defaultValue": "newspace.txt"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -271,6 +279,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
 					}
 				}
 			},
