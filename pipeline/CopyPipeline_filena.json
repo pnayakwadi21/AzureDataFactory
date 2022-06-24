@@ -46,7 +46,17 @@
 				"inputs": [
 					{
 						"referenceName": "SourceDataset_lnm",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"path": {
+								"value": "@pipeline().parameters.path",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
