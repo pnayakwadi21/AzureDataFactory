@@ -5729,13 +5729,29 @@
 					"referenceName": "AzureBlobStorageDf",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"path": {
+						"type": "string",
+						"defaultValue": "filo"
+					},
+					"filename": {
+						"type": "string",
+						"defaultValue": "newspace.txt"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "newspace.txt",
-						"container": "filo"
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"container": {
+							"value": "@dataset().path",
+							"type": "Expression"
+						}
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
