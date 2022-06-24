@@ -65,6 +65,15 @@
 		"linkedServiceSqlControl_properties_typeProperties_userName": {
 			"value": "universe\\nayakwadip"
 		},
+		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "ssisdbcata.database.windows.net"
+		},
+		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "nayakwadip"
+		},
+		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},
