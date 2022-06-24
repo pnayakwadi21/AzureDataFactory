@@ -46,13 +46,7 @@
 				"inputs": [
 					{
 						"referenceName": "SourceDataset_lnm",
-						"type": "DatasetReference",
-						"parameters": {
-							"path": {
-								"value": "@pipeline().parameters.filepath",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
@@ -64,7 +58,7 @@
 			}
 		],
 		"parameters": {
-			"filepath": {
+			"path": {
 				"type": "string",
 				"defaultValue": "filo"
 			},
