@@ -661,6 +661,16 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"parameters": {
+					"path": {
+						"type": "string",
+						"defaultValue": "filo"
+					},
+					"filename": {
+						"type": "string",
+						"defaultValue": "newspace.txt"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
