@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_lnm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "testsp",
+			"table": "Azure Blob Storage file"
+		}
+	}
+}
