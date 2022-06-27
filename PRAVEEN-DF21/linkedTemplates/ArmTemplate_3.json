@@ -716,7 +716,16 @@
 							{
 								"referenceName": "DestinationDataset_lnm",
 								"type": "DatasetReference",
-								"parameters": {}
+								"parameters": {
+									"DbServer": {
+										"value": "@pipeline().parameters.DbServerName",
+										"type": "Expression"
+									},
+									"DbName": {
+										"value": "@pipeline().parameters.DbName",
+										"type": "Expression"
+									}
+								}
 							}
 						]
 					}
@@ -733,6 +742,14 @@
 					"filename": {
 						"type": "string",
 						"defaultValue": "newspace.txt"
+					},
+					"DbServerName": {
+						"type": "string",
+						"defaultValue": " DWDEVDB,55219"
+					},
+					"DbName": {
+						"type": "string",
+						"defaultValue": "h21_Dw"
 					}
 				},
 				"annotations": []
