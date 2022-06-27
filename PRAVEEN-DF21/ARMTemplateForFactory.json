@@ -87,6 +87,30 @@
 			"type": "string",
 			"defaultValue": "universe\\nayakwadip"
 		},
+		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
+			"type": "string",
+			"defaultValue": "filo"
+		},
+		"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
+			"type": "string",
+			"defaultValue": "newspace.txt"
+		},
+		"trigger1112_properties_CopyPipeline_filena_parameters_path": {
+			"type": "string",
+			"defaultValue": "filo"
+		},
+		"trigger1112_properties_CopyPipeline_filena_parameters_filename": {
+			"type": "string",
+			"defaultValue": " newspace.txt"
+		},
+		"trigger1112_properties_CopyPipeline_filena_parameters_DbServerName": {
+			"type": "string",
+			"defaultValue": "DWDEVDB,55219"
+		},
+		"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
+			"type": "string",
+			"defaultValue": "h21_Dw"
+		},
 		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
 			"type": "string",
 			"defaultValue": "ssisdbcata.database.windows.net"
@@ -97,14 +121,6 @@
 		},
 		"integrationRuntime12_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
 			"type": "secureString"
-		},
-		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
-			"type": "string",
-			"defaultValue": "filo"
-		},
-		"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
-			"type": "string",
-			"defaultValue": "newspace.txt"
 		}
 	},
 	"variables": {
@@ -7139,6 +7155,76 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/trigger1111')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyPipeline_filena",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"path": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]",
+							"filename": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 15,
+						"startTime": "2022-06-24T16:21:00Z",
+						"endTime": "2022-06-25T00:10:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyPipeline_filena')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1112')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyPipeline_filena",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"path": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_path')]",
+							"filename": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_filename')]",
+							"DbServerName": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbServerName')]",
+							"DbName": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 15,
+						"startTime": "2022-06-27T14:00:00Z",
+						"endTime": "2022-06-27T14:50:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyPipeline_filena')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger1JsontoSql')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -7302,40 +7388,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/spacedeldataset')]",
 				"[concat(variables('factoryId'), '/datasets/DelimitedText7')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1111')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "CopyPipeline_filena",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"path": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]",
-							"filename": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 15,
-						"startTime": "2022-06-24T16:21:00Z",
-						"endTime": "2022-06-25T00:10:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/CopyPipeline_filena')]"
 			]
 		}
 	]
