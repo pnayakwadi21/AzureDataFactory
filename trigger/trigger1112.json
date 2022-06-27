@@ -1,0 +1,31 @@
+{
+	"name": "trigger1112",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_filena",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"path": "filo",
+					"filename": " newspace.txt",
+					"DbServerName": "DWDEVDB,55219",
+					"DbName": "h21_Dw"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2022-06-27T10:36:00Z",
+				"endTime": "2022-06-27T12:36:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
