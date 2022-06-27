@@ -4542,7 +4542,27 @@
 			"properties": {
 				"linkedServiceName": {
 					"referenceName": "SqlServerH21",
-					"type": "LinkedServiceReference"
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"servername": {
+							"value": "@dataset().DbServer",
+							"type": "Expression"
+						},
+						"DbName": {
+							"value": "@dataset().DbName",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"DbServer": {
+						"type": "string",
+						"defaultValue": "DWDEVDB,55219"
+					},
+					"DbName": {
+						"type": "string",
+						"defaultValue": "H21_DW"
+					}
 				},
 				"annotations": [],
 				"type": "SqlServerTable",
@@ -6977,6 +6997,16 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"servername": {
+						"type": "string",
+						"defaultValue": "DWDEVDB,55219"
+					},
+					"DbName": {
+						"type": "string",
+						"defaultValue": "h21_dw"
+					}
+				},
 				"annotations": [],
 				"type": "SqlServer",
 				"typeProperties": {

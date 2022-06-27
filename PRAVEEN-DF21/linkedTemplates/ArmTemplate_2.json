@@ -1265,6 +1265,16 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"servername": {
+						"type": "string",
+						"defaultValue": "DWDEVDB,55219"
+					},
+					"DbName": {
+						"type": "string",
+						"defaultValue": "h21_dw"
+					}
+				},
 				"annotations": [],
 				"type": "SqlServer",
 				"typeProperties": {
