@@ -79,7 +79,7 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": {
-									"value": "select * from aztestloader where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'\nand modifieddate<@{pipeline().parameters.ToDate}",
+									"value": "select * from aztestloader where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'\nand modifieddate<'@{pipeline().parameters.ToDate}'",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
