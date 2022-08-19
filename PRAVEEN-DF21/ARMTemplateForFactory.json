@@ -160,7 +160,7 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": {
-									"value": "select * from aztestloader where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'",
+									"value": "select * from aztestloader where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'\nand modifieddate<@{pipeline().parameters.ToDate}",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
@@ -256,6 +256,12 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"parameters": {
+					"ToDate": {
+						"type": "string",
+						"defaultValue": "2012-01-01"
+					}
 				},
 				"annotations": []
 			},
