@@ -25,7 +25,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from azload where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'",
+							"value": "select * from aztestloader where modifieddate >'@{activity('Lookupv').output.firstrow.fromdate}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
