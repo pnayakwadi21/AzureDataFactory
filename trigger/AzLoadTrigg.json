@@ -1,0 +1,25 @@
+{
+	"name": "AzLoadTrigg",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "AzLoad",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2022-08-19T11:00:00Z",
+				"endTime": "2022-08-19T14:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
