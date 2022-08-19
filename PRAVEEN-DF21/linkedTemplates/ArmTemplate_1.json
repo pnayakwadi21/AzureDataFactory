@@ -13,6 +13,30 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedTextjsonflat')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "filo"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_7cx')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -716,69 +740,6 @@
 						},
 						"timestamp": {
 							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_amk')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorageDf",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "jsonmultiarraylknkk.json",
-						"container": "praveen-container"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"returnReference": {
-							"type": "string"
-						},
-						"orderReference": {
-							"type": "string"
-						},
-						"customerId": {
-							"type": "integer"
-						},
-						"var": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"variantId": {
-										"type": "integer"
-									},
-									"quantity": {
-										"type": "integer"
-									}
-								}
-							}
-						},
-						"returnReason": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"code": {
-										"type": "integer"
-									},
-									"notes": {
-										"type": "string"
-									}
-								}
-							}
 						}
 					}
 				}

@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorageDf'"
 		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
 		"AzureStorageLinkedService_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
@@ -151,6 +155,9 @@
 					},
 					"AzureBlobStorageDf_connectionString": {
 						"value": "[parameters('AzureBlobStorageDf_connectionString')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
 					"AzureStorageLinkedService_connectionString": {
 						"value": "[parameters('AzureStorageLinkedService_connectionString')]"
@@ -295,24 +302,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
-						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
-					},
-					"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
-						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_path": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_path')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_filename": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_filename')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_DbServerName": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbServerName')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
 					}
 				}
 			},
@@ -333,6 +322,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_path": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_path')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_filename": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_filename')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_DbServerName": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbServerName')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
 					}
 				}
 			},
