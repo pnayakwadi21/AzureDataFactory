@@ -13,6 +13,43 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText9')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "zellis-rl"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedTextjsonflat')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -680,69 +717,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_7w0')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorageDf",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "jsonmultiarray.json",
-						"container": "filo"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"returnReference": {
-							"type": "string"
-						},
-						"orderReference": {
-							"type": "string"
-						},
-						"customerId": {
-							"type": "integer"
-						},
-						"items": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"variantId": {
-										"type": "integer"
-									},
-									"quantity": {
-										"type": "integer"
-									},
-									"returnReason": {
-										"type": "object",
-										"properties": {
-											"code": {
-												"type": "integer"
-											},
-											"notes": {
-												"type": "string"
-											}
-										}
-									}
-								}
-							}
-						},
-						"timestamp": {
-							"type": "string"
-						}
-					}
-				}
 			},
 			"dependsOn": []
 		}
