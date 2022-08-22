@@ -68,6 +68,9 @@
 		"linkedServiceSqlControl_properties_typeProperties_userName": {
 			"value": "universe\\nayakwadip"
 		},
+		"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
+			"value": "2014-01-01"
+		},
 		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
 			"value": "filo"
 		},

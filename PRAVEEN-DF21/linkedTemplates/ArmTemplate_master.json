@@ -91,6 +91,10 @@
 			"type": "string",
 			"defaultValue": "universe\\nayakwadip"
 		},
+		"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
+			"type": "string",
+			"defaultValue": "2014-01-01"
+		},
 		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
 			"type": "string",
 			"defaultValue": "filo"
@@ -322,6 +326,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
+						"value": "[parameters('AzLoadTrigg_properties_AzLoad_parameters_ToDate')]"
 					},
 					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
 						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
