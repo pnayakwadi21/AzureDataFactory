@@ -91,7 +91,7 @@
 		"parameters": {
 			"ToDate": {
 				"type": "string",
-				"defaultValue": "2019-01-01"
+				"defaultValue": "2004-01-01"
 			}
 		},
 		"annotations": []
