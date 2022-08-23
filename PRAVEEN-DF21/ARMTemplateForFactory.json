@@ -3245,6 +3245,22 @@
 								"ToDate": "2021-01-01"
 							}
 						}
+					},
+					{
+						"name": "Execute Pipeline3",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "AzLoad_copy2",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"ToDate": "2022-01-01"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -3255,7 +3271,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/AzLoad')]",
-				"[concat(variables('factoryId'), '/pipelines/AzLoad_copy1')]"
+				"[concat(variables('factoryId'), '/pipelines/AzLoad_copy1')]",
+				"[concat(variables('factoryId'), '/pipelines/AzLoad_copy2')]"
 			]
 		},
 		{
