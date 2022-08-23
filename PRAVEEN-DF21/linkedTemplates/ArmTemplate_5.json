@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "PRAVEEN-DF21"
 		},
-		"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
-			"type": "string",
-			"defaultValue": "2014-01-01"
-		},
 		"trigger1111_properties_CopyPipeline_filena_parameters_path": {
 			"type": "string",
 			"defaultValue": "filo"
@@ -34,6 +30,10 @@
 		"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
 			"type": "string",
 			"defaultValue": "h21_Dw"
+		},
+		"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
+			"type": "string",
+			"defaultValue": "2014-01-01"
 		}
 	},
 	"variables": {
@@ -724,37 +724,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzLoadTrigg')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "AzLoad",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"ToDate": "[parameters('AzLoadTrigg_properties_AzLoad_parameters_ToDate')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 15,
-						"startTime": "2022-08-23T00:30:00Z",
-						"endTime": "2022-08-23T16:45:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/trigger1111')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -1248,6 +1217,46 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/weatherdailyforecast_xf0_MiddleLevel')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzLoadTrigg')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "AzLoad",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"ToDate": "[parameters('AzLoadTrigg_properties_AzLoad_parameters_ToDate')]"
+						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "Testloader parallel",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 15,
+						"startTime": "2022-08-23T17:05:00Z",
+						"endTime": "2022-08-23T17:59:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Testloader parallel')]"
 			]
 		}
 	]
