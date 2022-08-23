@@ -12,6 +12,12 @@
 				"parameters": {
 					"ToDate": "2014-01-01"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Testloader parallel",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -19,8 +25,8 @@
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 15,
-				"startTime": "2022-08-23T00:30:00Z",
-				"endTime": "2022-08-23T16:45:00Z",
+				"startTime": "2022-08-23T17:05:00Z",
+				"endTime": "2022-08-23T17:59:00Z",
 				"timeZone": "UTC"
 			}
 		}
