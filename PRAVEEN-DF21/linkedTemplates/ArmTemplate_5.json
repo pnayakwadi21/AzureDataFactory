@@ -1249,8 +1249,8 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 15,
-						"startTime": "2022-08-23T17:05:00Z",
-						"endTime": "2022-08-23T17:59:00Z",
+						"startTime": "2022-08-25T12:00:00Z",
+						"endTime": "2022-08-25T15:00:00Z",
 						"timeZone": "UTC"
 					}
 				}
