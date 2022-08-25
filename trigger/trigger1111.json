@@ -13,12 +13,6 @@
 					"path": "filo",
 					"filename": "newspace.txt"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "pipeline5",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
