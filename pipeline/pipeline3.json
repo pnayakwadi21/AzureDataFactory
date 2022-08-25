@@ -37,7 +37,10 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"preCopyScript": "\nIF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}])TRUNCATE TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
+									"preCopyScript": {
+										"value": "\nIF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}])TRUNCATE TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
+										"type": "Expression"
+									},
 									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false
 								},
@@ -62,11 +65,38 @@
 									"referenceName": "SqlServerTableBDest",
 									"type": "DatasetReference",
 									"parameters": {
-										"DWTableName": "@item.TABLE_NAME",
-										"DWSchema": "@item.TABLE_SCHEMA"
+										"DWTableName": "@item().TABLE_NAME",
+										"DWSchema": "@item().TABLE_SCHEMA"
 									}
 								}
 							]
+						},
+						{
+							"name": "Stored procedure1",
+							"type": "SqlServerStoredProcedure",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"storedProcedureName": " [dbo].[Proc_SP_Portal_User_OrgHierarchy]"
+							},
+							"linkedServiceName": {
+								"referenceName": "SqlServerStagingList",
+								"type": "LinkedServiceReference"
+							}
 						}
 					]
 				}

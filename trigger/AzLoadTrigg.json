@@ -1,0 +1,34 @@
+{
+	"name": "AzLoadTrigg",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "AzLoad",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"ToDate": "2014-01-01"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "Testloader parallel",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2022-08-25T12:00:00Z",
+				"endTime": "2022-08-25T15:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

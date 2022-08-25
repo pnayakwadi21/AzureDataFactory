@@ -1,0 +1,135 @@
+{
+	"name": "CopyPipeline_filena",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_lnm",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "filo//newspace.txt"
+					},
+					{
+						"name": "Destination",
+						"value": "testsp.Azure Blob Storage file"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "Prop_0",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "Prop_1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "Prop_2",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_lnm",
+						"type": "DatasetReference",
+						"parameters": {
+							"path": {
+								"value": "@pipeline().parameters.path",
+								"type": "Expression"
+							},
+							"filename": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_lnm",
+						"type": "DatasetReference",
+						"parameters": {
+							"DbServer": {
+								"value": "@pipeline().parameters.DbServerName",
+								"type": "Expression"
+							},
+							"DbName": {
+								"value": "@pipeline().parameters.DbName",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"path": {
+				"type": "string",
+				"defaultValue": "filo"
+			},
+			"filename": {
+				"type": "string",
+				"defaultValue": "newspace.txt"
+			},
+			"DbServerName": {
+				"type": "string",
+				"defaultValue": " DWDEVDB,55219"
+			},
+			"DbName": {
+				"type": "string",
+				"defaultValue": "h21_Dw"
+			}
+		},
+		"annotations": []
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"name": "SourceDataset_lnm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDf",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"path": {
+				"type": "string",
+				"defaultValue": "filo"
+			},
+			"filename": {
+				"type": "string",
+				"defaultValue": "newspace.txt"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().path",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

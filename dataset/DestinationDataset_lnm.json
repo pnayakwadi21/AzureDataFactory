@@ -1,0 +1,36 @@
+{
+	"name": "DestinationDataset_lnm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"servername": {
+					"value": "@dataset().DbServer",
+					"type": "Expression"
+				},
+				"DbName": {
+					"value": "@dataset().DbName",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DbServer": {
+				"type": "string",
+				"defaultValue": "DWDEVDB,55219"
+			},
+			"DbName": {
+				"type": "string",
+				"defaultValue": "H21_DW"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "testsp",
+			"table": "Azure Blob Storage file"
+		}
+	}
+}

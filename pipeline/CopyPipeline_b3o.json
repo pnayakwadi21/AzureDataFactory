@@ -46,46 +46,25 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['WorkerNumber']"
+									"path": "$['Surname']"
 								},
 								"sink": {
-									"name": "WorkerNumber"
-								}
-							},
-							{
-								"source": {
-									"path": "$['FirstForename']"
-								},
-								"sink": {
-									"name": "FirstForename"
-								}
-							},
-							{
-								"source": {
-									"path": "$['WorkTelephoneExtension']"
-								},
-								"sink": {
-									"name": "WorkTelephoneExtension",
-									"type": "Int64"
-								}
-							},
-							{
-								"source": {
-									"path": "$['WorkerPayPeriods']"
-								},
-								"sink": {
-									"name": "WorkerPayPeriods",
-									"type": "String"
+									"name": "Surname"
 								}
 							}
 						],
+						"collectionReference": "",
 						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "SourceDataset_b3o",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filepath": "zellis-rl",
+							"filename": "rt"
+						}
 					}
 				],
 				"outputs": [

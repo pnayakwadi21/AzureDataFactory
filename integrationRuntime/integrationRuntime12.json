@@ -1,0 +1,30 @@
+{
+	"name": "integrationRuntime12",
+	"properties": {
+		"type": "Managed",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "UK South",
+				"nodeSize": "Standard_D1_v2",
+				"numberOfNodes": 1,
+				"maxParallelExecutionsPerNode": 1
+			},
+			"ssisProperties": {
+				"catalogInfo": {
+					"catalogServerEndpoint": "ssisdbcata.database.windows.net",
+					"catalogAdminUserName": "nayakwadip",
+					"catalogAdminPassword": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"catalogPricingTier": "S1"
+				},
+				"edition": "Standard",
+				"licenseType": "LicenseIncluded"
+			},
+			"customerVirtualNetwork": {
+				"subnetId": "/subscriptions/b9043cf7-a7f2-4036-b671-16d1903488c1/resourceGroups/H21PResourceGroup/providers/Microsoft.Network/virtualNetworks/H21SSISVN/subnets/default"
+			}
+		}
+	}
+}

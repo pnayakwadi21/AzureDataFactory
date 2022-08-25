@@ -5,13 +5,33 @@
 			"referenceName": "AzureStorageLinkedService",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filepath": {
+				"type": "string",
+				"defaultValue": "zellis-rl"
+			},
+			"directory": {
+				"type": "string",
+				"defaultValue": "Directory"
+			},
+			"filename": {
+				"type": "string",
+				"defaultValue": "rt"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "rt",
-				"container": "zellis-rl"
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().filepath",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {
