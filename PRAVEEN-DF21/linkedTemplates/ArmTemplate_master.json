@@ -5,7 +5,7 @@
 		"factoryName": {
 			"type": "string",
 			"metadata": "Data Factory name",
-			"defaultValue": "PRAVEEN-DF21"
+			"defaultValue": "praveen-df21"
 		},
 		"AzureBlobStorageDf_connectionString": {
 			"type": "secureString",

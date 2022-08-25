@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"factoryName": {
-			"value": "PRAVEEN-DF21"
+			"value": "praveen-df21"
 		},
 		"AzureBlobStorageDf_connectionString": {
 			"value": ""
