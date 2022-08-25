@@ -1302,6 +1302,13 @@
 							"path": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]",
 							"filename": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
 						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline5",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -1309,13 +1316,15 @@
 					"recurrence": {
 						"frequency": "Minute",
 						"interval": 15,
-						"startTime": "2022-06-24T16:21:00Z",
-						"endTime": "2022-06-25T00:10:00Z",
+						"startTime": "2022-08-25T16:16:00Z",
+						"endTime": "2022-08-25T16:40:00Z",
 						"timeZone": "UTC"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline5')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger1112')]",
