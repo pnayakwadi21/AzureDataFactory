@@ -49,6 +49,62 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_SourceDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Weatherbit",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_relativeUrl": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_z88_20210730"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().cw_relativeUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService4",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"BaseUrl": {
+						"type": "string",
+						"defaultValue": "\"https://api.weatherbit.io/v2.0/current?@city=Paris&Api_Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9\""
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().BaseUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SourceDataset_2x7')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1738,166 +1794,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_amk')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_n00temperature')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_n00",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "praveen-container/test-folder-praveen/temperature.txt"
-							},
-							{
-								"name": "Destination",
-								"value": "praveen-container//copyfiletemprature"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings",
-									"skipLineCount": 0
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"copyBehavior": "MergeFiles"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_n00",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_n00",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-07-28T08:59:43Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_n00')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_udv')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_udv",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "zellis-rl//zeworkerposts.json"
-							},
-							{
-								"name": "Destination",
-								"value": "filo//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "JsonReadSettings"
-								}
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "setOfObjects"
-								}
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_udv",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_udv",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_udv')]"
 			]
 		}
 	]

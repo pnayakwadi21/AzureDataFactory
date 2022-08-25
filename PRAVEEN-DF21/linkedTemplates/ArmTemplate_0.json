@@ -574,7 +574,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azureazloadclone')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable3')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -641,7 +641,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "azloadclone"
+					"table": "uniontable"
 				}
 			},
 			"dependsOn": [
@@ -649,30 +649,24 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureStorageLinkedService",
+					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "AzureSqlTable",
+				"schema": [],
 				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "test-folder-praveen",
-						"container": "praveen-container"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": []
+					"schema": "dbo",
+					"table": "dataflowAgg"
+				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureStorageLinkedService')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
 			]
 		}
 	]

@@ -13,6 +13,104 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Azureazloadclone')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "SalesOrderID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SalesOrderDetailID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CarrierTrackingNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "OrderQty",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SpecialOfferID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UnitPrice",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "UnitPriceDiscount",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "LineTotal",
+						"type": "decimal",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "azloadclone"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureStorageLinkedService",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "test-folder-praveen",
+						"container": "praveen-container"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText6')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -686,62 +784,6 @@
 				"typeProperties": {
 					"relativeUrl": {
 						"value": "@dataset().cw_relativeUrl",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_SourceDS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Weatherbit",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"cw_relativeUrl": {
-						"type": "String"
-					}
-				},
-				"folder": {
-					"name": "MetadataDrivenCopyTask_z88_20210730"
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@dataset().cw_relativeUrl",
-						"type": "Expression"
-					}
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/RestResource1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "RestService4",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"BaseUrl": {
-						"type": "string",
-						"defaultValue": "\"https://api.weatherbit.io/v2.0/current?@city=Paris&Api_Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9\""
-					}
-				},
-				"annotations": [],
-				"type": "RestResource",
-				"typeProperties": {
-					"relativeUrl": {
-						"value": "@dataset().BaseUrl",
 						"type": "Expression"
 					}
 				},

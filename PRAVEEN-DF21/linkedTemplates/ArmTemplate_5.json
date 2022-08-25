@@ -41,6 +41,501 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.tablelist",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"sqlReaderQuery": {
+												"value": "SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "SqlServerSink",
+											"preCopyScript": {
+												"value": "\nIF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}])TRUNCATE TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
+												"type": "Expression"
+											},
+											"writeBehavior": "insert",
+											"sqlWriterUseTableLock": false
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "SqlServerTableBSource",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "SqlServerTableBDest",
+											"type": "DatasetReference",
+											"parameters": {
+												"DWTableName": "@item().TABLE_NAME",
+												"DWSchema": "@item().TABLE_SCHEMA"
+											}
+										}
+									]
+								},
+								{
+									"name": "Stored procedure1",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [
+										{
+											"activity": "Copy data1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": " [dbo].[Proc_SP_Portal_User_OrgHierarchy]"
+									},
+									"linkedServiceName": {
+										"referenceName": "SqlServerStagingList",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"tablelist": {
+						"type": "array"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline5')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "dataflow4",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/weatherdailyforecast_xf0_BottomLevel')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This pipeline will copy objects from one group. The objects belonging to this group will be copied parallelly.",
+				"activities": [
+					{
+						"name": "ListObjectsFromOneGroup",
+						"description": "List objects from one group and iterate each of them to downstream activities",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.ObjectsPerGroupToCopy",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "RouteJobsBasedOnLoadingBehavior",
+									"description": "Check the loading behavior for each object if it requires full load or incremental load. If it is Default or FullLoad case, do full load. If it is DeltaLoad case, do incremental load via watermark column to identify changes.",
+									"type": "Switch",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"on": {
+											"value": "@json(item().DataLoadingBehaviorSettings).dataLoadingBehavior",
+											"type": "Expression"
+										},
+										"cases": [
+											{
+												"value": "FullLoad",
+												"activities": [
+													{
+														"name": "FullLoadOneObject",
+														"description": "Take a full snapshot on this object and copy it to the destination",
+														"type": "Copy",
+														"dependsOn": [],
+														"policy": {
+															"timeout": "7.00:00:00",
+															"retry": 0,
+															"retryIntervalInSeconds": 30,
+															"secureOutput": false,
+															"secureInput": false
+														},
+														"userProperties": [
+															{
+																"name": "Source",
+																"value": "@{json(item().SourceObjectSettings).relativeUrl}"
+															},
+															{
+																"name": "Destination",
+																"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
+															}
+														],
+														"typeProperties": {
+															"source": {
+																"type": "RestSource",
+																"httpRequestTimeout": {
+																	"value": "@json(item().CopySourceSettings).httpRequestTimeout",
+																	"type": "Expression"
+																},
+																"requestInterval": {
+																	"value": "@json(item().CopySourceSettings).requestInterval",
+																	"type": "Expression"
+																},
+																"requestMethod": {
+																	"value": "@json(item().CopySourceSettings).requestMethod",
+																	"type": "Expression"
+																},
+																"additionalHeaders": {
+																	"type": "Expression",
+																	"value": {
+																		"value": "@json(item().CopySourceSettings).additionalHeaders",
+																		"type": "Expression"
+																	}
+																}
+															},
+															"sink": {
+																"type": "SqlServerSink",
+																"preCopyScript": {
+																	"value": "@json(item().CopySinkSettings).preCopyScript",
+																	"type": "Expression"
+																},
+																"writeBehavior": {
+																	"value": "@json(item().CopySinkSettings).writeBehavior",
+																	"type": "Expression"
+																},
+																"upsertSettings": {
+																	"useTempDB": true
+																},
+																"tableOption": {
+																	"value": "@json(item().CopySinkSettings).tableOption",
+																	"type": "Expression"
+																}
+															},
+															"enableStaging": false,
+															"validateDataConsistency": false,
+															"translator": {
+																"value": "@json(item().CopyActivitySettings).translator",
+																"type": "Expression"
+															}
+														},
+														"inputs": [
+															{
+																"referenceName": "weatherdailyforecast_xf0_SourceDS",
+																"type": "DatasetReference",
+																"parameters": {
+																	"cw_relativeUrl": {
+																		"value": "@json(item().SourceObjectSettings).relativeUrl",
+																		"type": "Expression"
+																	}
+																}
+															}
+														],
+														"outputs": [
+															{
+																"referenceName": "weatherdailyforecast_xf0_DestinationDS",
+																"type": "DatasetReference",
+																"parameters": {
+																	"cw_schema": {
+																		"value": "@json(item().SinkObjectSettings).schema",
+																		"type": "Expression"
+																	},
+																	"cw_table": {
+																		"value": "@json(item().SinkObjectSettings).table",
+																		"type": "Expression"
+																	}
+																}
+															}
+														]
+													}
+												]
+											}
+										],
+										"defaultActivities": [
+											{
+												"name": "DefaultFullLoadOneObject",
+												"description": "Take a full snapshot on this object and copy it to the destination",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "7.00:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [
+													{
+														"name": "Source",
+														"value": "@{json(item().SourceObjectSettings).relativeUrl}"
+													},
+													{
+														"name": "Destination",
+														"value": "@{json(item().SinkObjectSettings).schema}.@{json(item().SinkObjectSettings).table}"
+													}
+												],
+												"typeProperties": {
+													"source": {
+														"type": "RestSource",
+														"httpRequestTimeout": {
+															"value": "@json(item().CopySourceSettings).httpRequestTimeout",
+															"type": "Expression"
+														},
+														"requestInterval": {
+															"value": "@json(item().CopySourceSettings).requestInterval",
+															"type": "Expression"
+														},
+														"requestMethod": {
+															"value": "@json(item().CopySourceSettings).requestMethod",
+															"type": "Expression"
+														},
+														"additionalHeaders": {
+															"type": "Expression",
+															"value": {
+																"value": "@json(item().CopySourceSettings).additionalHeaders",
+																"type": "Expression"
+															}
+														}
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"preCopyScript": {
+															"value": "@json(item().CopySinkSettings).preCopyScript",
+															"type": "Expression"
+														},
+														"writeBehavior": {
+															"value": "@json(item().CopySinkSettings).writeBehavior",
+															"type": "Expression"
+														},
+														"upsertSettings": {
+															"useTempDB": true
+														},
+														"tableOption": {
+															"value": "@json(item().CopySinkSettings).tableOption",
+															"type": "Expression"
+														}
+													},
+													"enableStaging": false,
+													"validateDataConsistency": false,
+													"translator": {
+														"value": "@json(item().CopyActivitySettings).translator",
+														"type": "Expression"
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "weatherdailyforecast_xf0_SourceDS",
+														"type": "DatasetReference",
+														"parameters": {
+															"cw_relativeUrl": {
+																"value": "@json(item().SourceObjectSettings).relativeUrl",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "weatherdailyforecast_xf0_DestinationDS",
+														"type": "DatasetReference",
+														"parameters": {
+															"cw_schema": {
+																"value": "@json(item().SinkObjectSettings).schema",
+																"type": "Expression"
+															},
+															"cw_table": {
+																"value": "@json(item().SinkObjectSettings).table",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"ObjectsPerGroupToCopy": {
+						"type": "Array"
+					}
+				},
+				"folder": {
+					"name": "weatherdailyforecast_xf0_20210729"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-29T11:15:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GetTableListAndTriggerCopyData')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LookupTableList",
+						"description": "Retrieve the table list from my database for Description",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"sqlReaderQuery": "SELECT  [SCHEMA]  TABLE_SCHEMA,\n[sname] [TABLE_NAME]\n      \n      \n  FROM [H21_STAGING].[dbo].[mload]",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"dataset": {
+								"referenceName": "SqlServerTableBSource",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					},
+					{
+						"name": "TriggerCopy",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LookupTableList",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "IterateAndCopySQLTables",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": false,
+							"parameters": {
+								"tableList": {
+									"value": "@activity('LookupTableList').output.value",
+									"type": "Expression"
+								}
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-03T14:33:56Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask2_vj9_TopLevel')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -667,7 +1162,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pipeline3')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/weatherdailyforecast_xf0_MiddleLevel')]",
@@ -784,7 +1281,9 @@
 				"annotations": [],
 				"lastPublishTime": "2021-07-29T11:15:16Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/weatherdailyforecast_xf0_BottomLevel')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger1111')]",
