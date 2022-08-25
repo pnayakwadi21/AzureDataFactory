@@ -13,6 +13,12 @@
 					"path": "filo",
 					"filename": "newspace.txt"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline5",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -20,8 +26,8 @@
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 15,
-				"startTime": "2022-06-24T16:21:00Z",
-				"endTime": "2022-06-25T00:10:00Z",
+				"startTime": "2022-08-25T15:35:00Z",
+				"endTime": "2022-06-25T16:40:00Z",
 				"timeZone": "UTC"
 			}
 		}
