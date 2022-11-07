@@ -1,0 +1,29 @@
+{
+	"name": "ZellisApiTestCopy",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://api.hcm.zellis.com/hotest/odata/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=refresh_token&client_id=56ce2011-c83e-4177-bf96-c506a5f62eff&client_secret=hNR8Q~jRsNW~~pPRAemcm31-qG9rQUBIiM~29aq9&refresh_token=14cddd7f2bbe4cb3b08bc9bcd4e0f2c9"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
