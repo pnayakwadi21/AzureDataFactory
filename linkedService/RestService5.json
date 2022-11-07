@@ -1,0 +1,12 @@
+{
+	"name": "RestService5",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://api.hcm.zellis.com/hotest/odata",
+			"enableServerCertificateValidation": false,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
