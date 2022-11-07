@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"url": "https://login.microsoftonline.com/{{\"https://api.hcm.zellis.com/hotest/odata\"}}/oauth2/v2.0/token",
+					"url": "https://login.microsoftonline.com/71c0b8a3-cb30-44d9-bee9-0711599b39e1/oauth2/v2.0/token",
 					"method": "POST",
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
