@@ -8,7 +8,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Posts?$filter=PostId eq 4738"
+			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Posts"
 		},
 		"schema": []
 	}
