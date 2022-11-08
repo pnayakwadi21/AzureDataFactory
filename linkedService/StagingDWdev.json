@@ -1,0 +1,17 @@
+{
+	"name": "StagingDWdev",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=DWDEVDB,55219;initial catalog=h21_staging",
+			"userName": "universe\\nayakwadip",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxNjc2NzgwYy04ODFiLTQyNGYtYjI1Ny1mMjZiZTFlZmNiNzAiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeAzure",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
