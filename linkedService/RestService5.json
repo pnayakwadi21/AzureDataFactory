@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://api.hcm.zellis.com/hotest/odata/Posts",
+			"url": "https://api.hcm.zellis.com/hotest/odata",
 			"enableServerCertificateValidation": false,
 			"authenticationType": "Anonymous"
 		}
