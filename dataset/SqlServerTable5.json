@@ -2,12 +2,8 @@
 	"name": "SqlServerTable5",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "SqlServerH21",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"servername": "DWDEVDB,55219",
-				"DbName": "h21_dw"
-			}
+			"referenceName": "StagingDWdev",
+			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "SqlServerTable",

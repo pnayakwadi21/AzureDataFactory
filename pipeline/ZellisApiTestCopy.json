@@ -20,7 +20,7 @@
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "tenant=tenantid&client_id=56ce2011-c83e-4177-bf96-c506a5f62eff &client_secret=hNR8Q~jRsNW~~pPRAemcm31-qG9rQUBIiM~29aq9&grant_type=client_credentials&scope=https://graph.microsoft.com/.default"
+					"body": "tenant=tenantid&client_id=56ce2011-c83e-4177-bf96-c506a5f62eff &client_secret=hNR8Q~jRsNW~~pPRAemcm31-qG9rQUBIiM~29aq9&grant_type=client_credentials&scope=api://0586721c-b894-41da-9777-4cc8f8c321ef/.default"
 				}
 			},
 			{
@@ -52,7 +52,9 @@
 							"Authorization": {
 								"value": "Bearer @{activity('Web1').output.access_token}",
 								"type": "Expression"
-							}
+							},
+							"Ocp-Apim-Subscription-Key": "14cddd7f2bbe4cb3b08bc9bcd4e0f2c9",
+							"Content-Type": "application/Json"
 						},
 						"paginationRules": {
 							"supportRFC5988": "true"
@@ -61,9 +63,44 @@
 					"sink": {
 						"type": "SqlServerSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['@odata.context']"
+								},
+								"sink": {
+									"name": "@odata.context",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['value'][0]['LongDescription']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['value'][0]['Code']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['value'][0]['PostId']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['value'][0]['ShortDescription']"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
