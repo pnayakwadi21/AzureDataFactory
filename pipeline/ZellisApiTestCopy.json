@@ -72,34 +72,42 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['@odata.context']"
+									"path": "$['value'][0]['LongDescription']"
 								},
 								"sink": {
-									"name": "@odata.context",
+									"name": "long_desc",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['value'][0]['LongDescription']"
-								}
-							},
-							{
-								"source": {
 									"path": "$['value'][0]['Code']"
+								},
+								"sink": {
+									"name": "code",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['value'][0]['PostId']"
+								},
+								"sink": {
+									"name": "PostId",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['value'][0]['ShortDescription']"
+								},
+								"sink": {
+									"name": "short_desc",
+									"type": "String"
 								}
 							}
-						]
+						],
+						"collectionReference": ""
 					}
 				},
 				"inputs": [
