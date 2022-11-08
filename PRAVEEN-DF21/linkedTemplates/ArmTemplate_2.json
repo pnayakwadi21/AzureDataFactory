@@ -5,7 +5,15 @@
 		"factoryName": {
 			"type": "string",
 			"metadata": "Data Factory name",
-			"defaultValue": "praveen-df21"
+			"defaultValue": "PRAVEEN-DF21"
+		},
+		"SqlServer1nw_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1nw'"
+		},
+		"SqlServer1nw_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1nw'"
 		},
 		"SqlServerH21_connectionString": {
 			"type": "secureString",
@@ -23,13 +31,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServerStagingList'"
 		},
-		"linkedServiceSqlControl_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedServiceSqlControl'"
-		},
-		"linkedServiceSqlControl_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'linkedServiceSqlControl'"
+		"SqlServer1nw_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
 		},
 		"SqlServerH21_properties_typeProperties_userName": {
 			"type": "string",
@@ -38,16 +42,41 @@
 		"SqlServerStagingList_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "universe\\nayakwadip"
-		},
-		"linkedServiceSqlControl_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "universe\\nayakwadip"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_esm_SourceDS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService3",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_relativeUrl": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "MetadataDrivenCopyTask_esm_20210730"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": {
+						"value": "@dataset().cw_relativeUrl",
+						"type": "Expression"
+					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/MetadataDrivenCopyTask_z88_SourceDS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -99,6 +128,24 @@
 						"value": "@dataset().BaseUrl",
 						"type": "Expression"
 					}
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestResource2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "RestService5",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {
+					"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Posts"
 				},
 				"schema": []
 			},
@@ -1497,6 +1544,28 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1nw')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1nw_connectionString')]",
+					"userName": "[parameters('SqlServer1nw_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1nw_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeAzure",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SqlServerH21')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -1549,252 +1618,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/linkedServiceSqlControl')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"connectionString": "[parameters('linkedServiceSqlControl_connectionString')]",
-					"userName": "[parameters('linkedServiceSqlControl_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('linkedServiceSqlControl_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntimeAzure",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_7w0')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_7w0",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "filo//jsonmultiarray.json"
-							},
-							{
-								"name": "Destination",
-								"value": "praveen-container//JSONFT"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "JsonReadSettings"
-								}
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"copyBehavior": "FlattenHierarchy"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['returnReference']"
-										},
-										"sink": {
-											"path": "$['returnReference']"
-										}
-									},
-									{
-										"source": {
-											"path": "$['orderReference']"
-										},
-										"sink": {
-											"path": "$['orderReference']"
-										}
-									},
-									{
-										"source": {
-											"path": "$['customerId']"
-										},
-										"sink": {
-											"path": "$['customerId']"
-										}
-									}
-								],
-								"collectionReference": "$['items']"
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_7w0",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_7w0",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-09T12:42:47Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_7w0')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_amk')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_amk",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "praveen-container//jsonmultiarraylknkk.json"
-							},
-							{
-								"name": "Destination",
-								"value": "filo//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "JsonReadSettings"
-								}
-							},
-							"sink": {
-								"type": "JsonSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "JsonWriteSettings",
-									"filePattern": "arrayOfObjects"
-								}
-							},
-							"enableStaging": false,
-							"validateDataConsistency": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['returnReference']"
-										},
-										"sink": {
-											"path": "$['returnReference']"
-										}
-									},
-									{
-										"source": {
-											"path": "$['orderReference']"
-										},
-										"sink": {
-											"path": "$['orderReference']"
-										}
-									},
-									{
-										"source": {
-											"path": "$['customerId']"
-										},
-										"sink": {
-											"path": "$['customerId']"
-										}
-									},
-									{
-										"source": {
-											"path": "$['var'][0]['variantId']"
-										},
-										"sink": {
-											"path": "$['variantId']"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_amk",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_amk",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-09T15:11:59Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_amk')]"
-			]
 		}
 	]
 }

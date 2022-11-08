@@ -3,7 +3,7 @@
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"factoryName": {
-			"value": "praveen-df21"
+			"value": "PRAVEEN-DF21"
 		},
 		"AzureBlobStorageDf_connectionString": {
 			"value": ""
@@ -12,6 +12,12 @@
 			"value": ""
 		},
 		"AzureStorageLinkedService_connectionString": {
+			"value": ""
+		},
+		"SqlServer1nw_connectionString": {
+			"value": ""
+		},
+		"SqlServer1nw_password": {
 			"value": ""
 		},
 		"SqlServerH21_connectionString": {
@@ -24,6 +30,12 @@
 			"value": ""
 		},
 		"SqlServerStagingList_password": {
+			"value": ""
+		},
+		"StagingDWdev_connectionString": {
+			"value": ""
+		},
+		"StagingDWdev_password": {
 			"value": ""
 		},
 		"Store Account Linked Service_connectionString": {
@@ -56,10 +68,19 @@
 		"RestService4_properties_typeProperties_url": {
 			"value": "http://api.weatherbit.io/v2.0/current"
 		},
+		"RestService5_properties_typeProperties_url": {
+			"value": "https://api.hcm.zellis.com/hotest/odata"
+		},
+		"SqlServer1nw_properties_typeProperties_userName": {
+			"value": "universe\\nayakwadip"
+		},
 		"SqlServerH21_properties_typeProperties_userName": {
 			"value": "universe\\nayakwadip"
 		},
 		"SqlServerStagingList_properties_typeProperties_userName": {
+			"value": "universe\\nayakwadip"
+		},
+		"StagingDWdev_properties_typeProperties_userName": {
 			"value": "universe\\nayakwadip"
 		},
 		"Weatherbit_properties_typeProperties_url": {

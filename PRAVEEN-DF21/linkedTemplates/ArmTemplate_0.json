@@ -5,7 +5,7 @@
 		"factoryName": {
 			"type": "string",
 			"metadata": "Data Factory name",
-			"defaultValue": "praveen-df21"
+			"defaultValue": "PRAVEEN-DF21"
 		},
 		"AzureBlobStorageDf_connectionString": {
 			"type": "secureString",
@@ -50,6 +50,10 @@
 		"RestService4_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "http://api.weatherbit.io/v2.0/current"
+		},
+		"RestService5_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.hcm.zellis.com/hotest/odata"
 		},
 		"Weatherbit_properties_typeProperties_url": {
 			"type": "string",
@@ -271,6 +275,21 @@
 							"value": "**********"
 						}
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RestService5')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('RestService5_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": false,
+					"authenticationType": "Anonymous"
 				}
 			},
 			"dependsOn": []
@@ -642,27 +661,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "uniontable"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlTable4')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "dataflowAgg"
 				}
 			},
 			"dependsOn": [

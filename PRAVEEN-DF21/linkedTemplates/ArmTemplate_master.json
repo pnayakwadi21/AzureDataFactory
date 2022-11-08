@@ -5,7 +5,7 @@
 		"factoryName": {
 			"type": "string",
 			"metadata": "Data Factory name",
-			"defaultValue": "praveen-df21"
+			"defaultValue": "PRAVEEN-DF21"
 		},
 		"AzureBlobStorageDf_connectionString": {
 			"type": "secureString",
@@ -18,6 +18,14 @@
 		"AzureStorageLinkedService_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureStorageLinkedService'"
+		},
+		"SqlServer1nw_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1nw'"
+		},
+		"SqlServer1nw_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1nw'"
 		},
 		"SqlServerH21_connectionString": {
 			"type": "secureString",
@@ -34,6 +42,14 @@
 		"SqlServerStagingList_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServerStagingList'"
+		},
+		"StagingDWdev_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'StagingDWdev'"
+		},
+		"StagingDWdev_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'StagingDWdev'"
 		},
 		"Store Account Linked Service_connectionString": {
 			"type": "secureString",
@@ -75,11 +91,23 @@
 			"type": "string",
 			"defaultValue": "http://api.weatherbit.io/v2.0/current"
 		},
+		"RestService5_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://api.hcm.zellis.com/hotest/odata"
+		},
+		"SqlServer1nw_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
+		},
 		"SqlServerH21_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "universe\\nayakwadip"
 		},
 		"SqlServerStagingList_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "universe\\nayakwadip"
+		},
+		"StagingDWdev_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "universe\\nayakwadip"
 		},
@@ -190,6 +218,9 @@
 					"RestService4_properties_typeProperties_url": {
 						"value": "[parameters('RestService4_properties_typeProperties_url')]"
 					},
+					"RestService5_properties_typeProperties_url": {
+						"value": "[parameters('RestService5_properties_typeProperties_url')]"
+					},
 					"Weatherbit_properties_typeProperties_url": {
 						"value": "[parameters('Weatherbit_properties_typeProperties_url')]"
 					},
@@ -240,6 +271,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"SqlServer1nw_connectionString": {
+						"value": "[parameters('SqlServer1nw_connectionString')]"
+					},
+					"SqlServer1nw_password": {
+						"value": "[parameters('SqlServer1nw_password')]"
+					},
 					"SqlServerH21_connectionString": {
 						"value": "[parameters('SqlServerH21_connectionString')]"
 					},
@@ -252,20 +289,14 @@
 					"SqlServerStagingList_password": {
 						"value": "[parameters('SqlServerStagingList_password')]"
 					},
-					"linkedServiceSqlControl_connectionString": {
-						"value": "[parameters('linkedServiceSqlControl_connectionString')]"
-					},
-					"linkedServiceSqlControl_password": {
-						"value": "[parameters('linkedServiceSqlControl_password')]"
+					"SqlServer1nw_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1nw_properties_typeProperties_userName')]"
 					},
 					"SqlServerH21_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServerH21_properties_typeProperties_userName')]"
 					},
 					"SqlServerStagingList_properties_typeProperties_userName": {
 						"value": "[parameters('SqlServerStagingList_properties_typeProperties_userName')]"
-					},
-					"linkedServiceSqlControl_properties_typeProperties_userName": {
-						"value": "[parameters('linkedServiceSqlControl_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -286,6 +317,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"StagingDWdev_connectionString": {
+						"value": "[parameters('StagingDWdev_connectionString')]"
+					},
+					"StagingDWdev_password": {
+						"value": "[parameters('StagingDWdev_password')]"
+					},
+					"linkedServiceSqlControl_connectionString": {
+						"value": "[parameters('linkedServiceSqlControl_connectionString')]"
+					},
+					"linkedServiceSqlControl_password": {
+						"value": "[parameters('linkedServiceSqlControl_password')]"
+					},
+					"StagingDWdev_properties_typeProperties_userName": {
+						"value": "[parameters('StagingDWdev_properties_typeProperties_userName')]"
+					},
+					"linkedServiceSqlControl_properties_typeProperties_userName": {
+						"value": "[parameters('linkedServiceSqlControl_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -344,6 +393,26 @@
 					},
 					"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
 						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "PRAVEEN-DF21_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
 						"value": "[parameters('AzLoadTrigg_properties_AzLoad_parameters_ToDate')]"
@@ -351,7 +420,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_4')]"
+				"[resourceId('Microsoft.Resources/deployments', 'PRAVEEN-DF21_ArmTemplate_5')]"
 			]
 		}
 	]
