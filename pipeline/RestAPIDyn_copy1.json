@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "select apiref,\n    desttable,cref from metadata\nwhere desttable='SevereWeather'\n",
+						"sqlReaderQuery": "SELECT * FROM  dbo.metadata\nWHERE desttable='zellisPost'\n\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -42,7 +42,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "RestTest",
+						"referenceName": "RestTest_copy1",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": false,
