@@ -14,10 +14,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": {
-				"value": "@dataset().BaseUrl",
-				"type": "Expression"
-			}
+			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Posts"
 		},
 		"schema": []
 	},
