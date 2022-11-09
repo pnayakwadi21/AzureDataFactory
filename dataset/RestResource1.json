@@ -2,7 +2,7 @@
 	"name": "RestResource1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "RestService4",
+			"referenceName": "RestService5",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
