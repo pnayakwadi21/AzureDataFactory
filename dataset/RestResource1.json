@@ -8,7 +8,7 @@
 		"parameters": {
 			"BaseUrl": {
 				"type": "string",
-				"defaultValue": "\"https://api.weatherbit.io/v2.0/current?@city=Paris&Api_Key=ba836ede-1c9b-4c98-95f8-1a9405ee19c9\""
+				"defaultValue": "\"https://api.hcm.zellis.com/hotest/odata/Posts\""
 			}
 		},
 		"annotations": [],
