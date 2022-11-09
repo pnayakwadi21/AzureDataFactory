@@ -93,7 +93,7 @@
 		},
 		"RestService5_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://api.hcm.zellis.com/hotest/odata"
+			"defaultValue": "https://api.hcm.zellis.com/hotest/odata/Posts"
 		},
 		"SqlServer1nw_properties_typeProperties_userName": {
 			"type": "string",
@@ -375,24 +375,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
-						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
-					},
-					"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
-						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_path": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_path')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_filename": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_filename')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_DbServerName": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbServerName')]"
-					},
-					"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
-						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
 					}
 				}
 			},
@@ -413,6 +395,24 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_path": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_path')]"
+					},
+					"trigger1111_properties_CopyPipeline_filena_parameters_filename": {
+						"value": "[parameters('trigger1111_properties_CopyPipeline_filena_parameters_filename')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_path": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_path')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_filename": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_filename')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_DbServerName": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbServerName')]"
+					},
+					"trigger1112_properties_CopyPipeline_filena_parameters_DbName": {
+						"value": "[parameters('trigger1112_properties_CopyPipeline_filena_parameters_DbName')]"
 					},
 					"AzLoadTrigg_properties_AzLoad_parameters_ToDate": {
 						"value": "[parameters('AzLoadTrigg_properties_AzLoad_parameters_ToDate')]"
