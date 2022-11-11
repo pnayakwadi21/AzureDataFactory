@@ -53,7 +53,7 @@
 		},
 		"RestService5_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://api.hcm.zellis.com/hotest/odata/Posts"
+			"defaultValue": "https://api.hcm.zellis.com/hotest/odata"
 		},
 		"Weatherbit_properties_typeProperties_url": {
 			"type": "string",

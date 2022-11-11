@@ -69,7 +69,7 @@
 			"value": "http://api.weatherbit.io/v2.0/current"
 		},
 		"RestService5_properties_typeProperties_url": {
-			"value": "https://api.hcm.zellis.com/hotest/odata/Posts"
+			"value": "https://api.hcm.zellis.com/hotest/odata"
 		},
 		"SqlServer1nw_properties_typeProperties_userName": {
 			"value": "universe\\nayakwadip"

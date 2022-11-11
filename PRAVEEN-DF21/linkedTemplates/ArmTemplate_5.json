@@ -332,11 +332,7 @@
 											"sqlWriterUseTableLock": false,
 											"tableOption": "autoCreate"
 										},
-										"enableStaging": false,
-										"translator": {
-											"value": "@item().cref",
-											"type": "Expression"
-										}
+										"enableStaging": false
 									},
 									"inputs": [
 										{
@@ -1999,7 +1995,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "SqlServerSource",
-								"sqlReaderQuery": "SELECT * FROM  dbo.metadata\nWHERE desttable='zellisPost'\n\n",
+								"sqlReaderQuery": "SELECT * FROM  dbo.metadata\nWHERE desttable in ('grade','ZellisPost')\n\n",
 								"queryTimeout": "02:00:00",
 								"partitionOption": "None"
 							},
