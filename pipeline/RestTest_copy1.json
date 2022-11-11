@@ -57,11 +57,6 @@
 									"mappings": [
 										{
 											"source": {
-												"path": "$['@odata.context']"
-											}
-										},
-										{
-											"source": {
 												"path": "['LongDescription']"
 											},
 											"sink": {
