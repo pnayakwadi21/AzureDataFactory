@@ -92,7 +92,8 @@
 											}
 										}
 									],
-									"collectionReference": ""
+									"collectionReference": "$['value']",
+									"mapComplexValuesToString": true
 								}
 							},
 							"inputs": [
