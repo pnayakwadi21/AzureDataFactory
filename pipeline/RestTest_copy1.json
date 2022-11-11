@@ -53,8 +53,47 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@json(item().cref)",
-									"type": "Expression"
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['LongDescription']"
+											},
+											"sink": {
+												"name": "LongDescription",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['Code']"
+											},
+											"sink": {
+												"name": "Code",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PostId']"
+											},
+											"sink": {
+												"name": "PostId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ShortDescription']"
+											},
+											"sink": {
+												"name": "ShortDescription",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "$['value']",
+									"mapComplexValuesToString": false
 								}
 							},
 							"inputs": [
