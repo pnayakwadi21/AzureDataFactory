@@ -39,7 +39,10 @@
 									"requestInterval": "00.00:00:00.010",
 									"requestMethod": "GET",
 									"additionalHeaders": {
-										"Authorization": "Bearer @{activity('Web1').output.access_token}",
+										"Authorization": {
+											"value": "Bearer @{activity('Web1').output.access_token}",
+											"type": "Expression"
+										},
 										"Ocp-Apim-Subscription-Key": "14cddd7f2bbe4cb3b08bc9bcd4e0f2c9",
 										"Content-Type": "application/Json"
 									}
@@ -50,8 +53,46 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@json(item().cref)",
-									"type": "Expression"
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['LongDescription']"
+											},
+											"sink": {
+												"name": "LongDescription",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeId']"
+											},
+											"sink": {
+												"name": "GradeId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['Code']"
+											},
+											"sink": {
+												"name": "Code",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ShortDescription']"
+											},
+											"sink": {
+												"name": "ShortDescription",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "$['value']"
 								}
 							},
 							"inputs": [
