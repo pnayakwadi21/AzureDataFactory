@@ -8,13 +8,16 @@
 		"parameters": {
 			"BaseUrl": {
 				"type": "string",
-				"defaultValue": "\"https://api.hcm.zellis.com/hotest/odata/Posts\""
+				"defaultValue": "\"https://api.hcm.zellis.com/hotest/odata\""
 			}
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Grades"
+			"relativeUrl": {
+				"value": "@dataset().BaseUrl",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	},
