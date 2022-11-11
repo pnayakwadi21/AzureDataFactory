@@ -53,8 +53,47 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@json(item().cref)",
-									"type": "Expression"
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['value'][0]['LongDescription']"
+											},
+											"sink": {
+												"name": "LongDescription",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['value'][0]['GradeId']"
+											},
+											"sink": {
+												"name": "GradeId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['value'][0]['Code']"
+											},
+											"sink": {
+												"name": "Code",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "$['value'][0]['ShortDescription']"
+											},
+											"sink": {
+												"name": "ShortDescription",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "",
+									"mapComplexValuesToString": false
 								}
 							},
 							"inputs": [
