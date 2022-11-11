@@ -56,11 +56,7 @@
 									"sqlWriterUseTableLock": false,
 									"tableOption": "autoCreate"
 								},
-								"enableStaging": false,
-								"translator": {
-									"value": "@item().cref",
-									"type": "Expression"
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
