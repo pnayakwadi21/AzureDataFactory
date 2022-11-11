@@ -14,7 +14,7 @@
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Posts"
+			"relativeUrl": "https://api.hcm.zellis.com/hotest/odata/Grades"
 		},
 		"schema": []
 	},
