@@ -53,7 +53,7 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@item().cref",
+									"value": "@json(item().cref)",
 									"type": "Expression"
 								}
 							},
