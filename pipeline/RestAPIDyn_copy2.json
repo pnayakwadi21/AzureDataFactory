@@ -1,0 +1,70 @@
+{
+	"name": "RestAPIDyn_copy2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookupapi",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT * FROM  dbo.metadata\nWHERE desttable in ('WorkerPosts')\n\n",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable3meta",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Execute Pipeline2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Lookupapi",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "RestTest_copy3",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": false,
+					"parameters": {
+						"tableapi": {
+							"value": "@activity('Lookupapi').output.value",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"variables": {
+			"array": {
+				"type": "String"
+			},
+			"arrayn": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-11T10:46:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
