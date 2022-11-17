@@ -5,11 +5,18 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@pipeline().parameters.PageNo",
+						"value": "@variables('arrayn')",
 						"type": "Expression"
 					},
 					"activities": [
@@ -49,8 +56,478 @@
 								},
 								"enableStaging": false,
 								"translator": {
-									"value": "@json(pipeline().parameters.mcref)",
-									"type": "Expression"
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "['PostJoinReasonId']"
+											},
+											"sink": {
+												"name": "PostJoinReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['OccupancyTypeId']"
+											},
+											"sink": {
+												"name": "OccupancyTypeId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeBasicSalary']"
+											},
+											"sink": {
+												"name": "GradeBasicSalary",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ProjectedEndDate']"
+											},
+											"sink": {
+												"name": "ProjectedEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternId']"
+											},
+											"sink": {
+												"name": "WorkPatternId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternStartDay']"
+											},
+											"sink": {
+												"name": "WorkPatternStartDay",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ApprenticeEndDate']"
+											},
+											"sink": {
+												"name": "ApprenticeEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['HesaFlag']"
+											},
+											"sink": {
+												"name": "HesaFlag",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['RecordEndDate']"
+											},
+											"sink": {
+												"name": "RecordEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ApprenticeStartDate']"
+											},
+											"sink": {
+												"name": "ApprenticeStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternStartDate']"
+											},
+											"sink": {
+												"name": "WorkPatternStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractHoursWeeksPerYear']"
+											},
+											"sink": {
+												"name": "ContractHoursWeeksPerYear",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PositionStatusStartDate']"
+											},
+											"sink": {
+												"name": "PositionStatusStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkerId']"
+											},
+											"sink": {
+												"name": "WorkerId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternEndDate']"
+											},
+											"sink": {
+												"name": "WorkPatternEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PositionStatusId']"
+											},
+											"sink": {
+												"name": "PositionStatusId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeOverrideReasonId']"
+											},
+											"sink": {
+												"name": "GradeOverrideReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PostId']"
+											},
+											"sink": {
+												"name": "PostId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeOverrideStep']"
+											},
+											"sink": {
+												"name": "GradeOverrideStep",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PostStartDate']"
+											},
+											"sink": {
+												"name": "PostStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeStartDate']"
+											},
+											"sink": {
+												"name": "GradeStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['RecordStartDate']"
+											},
+											"sink": {
+												"name": "RecordStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ServiceConditionEndDate']"
+											},
+											"sink": {
+												"name": "ServiceConditionEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractHours']"
+											},
+											"sink": {
+												"name": "ContractHours",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractHoursStartDate']"
+											},
+											"sink": {
+												"name": "ContractHoursStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PostLeaveReasonId']"
+											},
+											"sink": {
+												"name": "PostLeaveReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternReasonId']"
+											},
+											"sink": {
+												"name": "WorkPatternReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['LocationStartDate']"
+											},
+											"sink": {
+												"name": "LocationStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PositionStatusEndDate']"
+											},
+											"sink": {
+												"name": "PositionStatusEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeCarryForward']"
+											},
+											"sink": {
+												"name": "GradeCarryForward",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractHoursEndDate']"
+											},
+											"sink": {
+												"name": "ContractHoursEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['MultiWeeks']"
+											},
+											"sink": {
+												"name": "MultiWeeks",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractNo']"
+											},
+											"sink": {
+												"name": "ContractNo",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkerPostId']"
+											},
+											"sink": {
+												"name": "WorkerPostId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeCurrentPoint']"
+											},
+											"sink": {
+												"name": "GradeCurrentPoint",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeEndDate']"
+											},
+											"sink": {
+												"name": "GradeEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['WorkPatternNoTimesFlag']"
+											},
+											"sink": {
+												"name": "WorkPatternNoTimesFlag",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ServiceConditionStartDate']"
+											},
+											"sink": {
+												"name": "ServiceConditionStartDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ContractHoursFTE']"
+											},
+											"sink": {
+												"name": "ContractHoursFTE",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['LocationId']"
+											},
+											"sink": {
+												"name": "LocationId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['FTE']"
+											},
+											"sink": {
+												"name": "FTE",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeReasonId']"
+											},
+											"sink": {
+												"name": "GradeReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeId']"
+											},
+											"sink": {
+												"name": "GradeId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['IsSuspended']"
+											},
+											"sink": {
+												"name": "IsSuspended",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['MultiHours']"
+											},
+											"sink": {
+												"name": "MultiHours",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['CostCentreSourceId']"
+											},
+											"sink": {
+												"name": "CostCentreSourceId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['ServiceConditionId']"
+											},
+											"sink": {
+												"name": "ServiceConditionId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['GradeOverrideDate']"
+											},
+											"sink": {
+												"name": "GradeOverrideDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['LocationReasonId']"
+											},
+											"sink": {
+												"name": "LocationReasonId",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['IsMainPost']"
+											},
+											"sink": {
+												"name": "IsMainPost",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['PostEndDate']"
+											},
+											"sink": {
+												"name": "PostEndDate",
+												"type": "String"
+											}
+										},
+										{
+											"source": {
+												"path": "['LocationEndDate']"
+											},
+											"sink": {
+												"name": "LocationEndDate",
+												"type": "String"
+											}
+										}
+									],
+									"collectionReference": "$['value']"
 								}
 							},
 							"inputs": [
@@ -71,7 +548,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"tablename": {
-											"value": "@item().desttable",
+											"value": "@pipeline().parameters.sdesttable",
 											"type": "Expression"
 										}
 									}
@@ -80,28 +557,48 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "arrayn",
+					"value": {
+						"value": "@split(pipeline().parameters.PageNo,',') ",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
 			"PageNo": {
-				"type": "array",
-				"defaultValue": [
-					1,
-					2,
-					3
-				]
+				"type": "string",
+				"defaultValue": "1,2,3"
 			},
 			"mcref": {
 				"type": "string"
 			},
 			"sapiref": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "https://api.hcm.zellis.com/hotest/odata/WorkerPosts"
 			},
 			"sdesttable": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "WorkerPosts"
 			},
 			"Btoken": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiJhcGk6Ly8wNTg2NzIxYy1iODk0LTQxZGEtOTc3Ny00Y2M4ZjhjMzIxZWYiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83MWMwYjhhMy1jYjMwLTQ0ZDktYmVlOS0wNzExNTk5YjM5ZTEvIiwiaWF0IjoxNjY4NzAxNzk4LCJuYmYiOjE2Njg3MDE3OTgsImV4cCI6MTY2ODcwNTY5OCwiYWlvIjoiRTJaZ1lIZ2NQcHMvNGZpbFN3S3lDVnMrVDdnZkN3QT0iLCJhcHBpZCI6IjU2Y2UyMDExLWM4M2UtNDE3Ny1iZjk2LWM1MDZhNWY2MmVmZiIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzcxYzBiOGEzLWNiMzAtNDRkOS1iZWU5LTA3MTE1OTliMzllMS8iLCJvaWQiOiJhNjdmMzllMy1mMTU4LTRiY2ItYjlmMS0yY2QxYmQzYWMxOTMiLCJyaCI6IjAuQVVnQW83akFjVERMMlVTLTZRY1JXWnM1NFJ4eWhnV1V1TnBCbDNkTXlQakRJZTlJQUFBLiIsInN1YiI6ImE2N2YzOWUzLWYxNTgtNGJjYi1iOWYxLTJjZDFiZDNhYzE5MyIsInRpZCI6IjcxYzBiOGEzLWNiMzAtNDRkOS1iZWU5LTA3MTE1OTliMzllMSIsInV0aSI6Ik5GcmlqREFYWTBTQXR0MVo4dlVVQUEiLCJ2ZXIiOiIxLjAifQ.XzvhojQJsAjDYmblpxK3IWilE_6MPJKBPRRV9xFVbruKAVMeRikrvXq3RFhEU2AUNegMgaUaVDwLI7WuM2uBode5Qu_VhrDsKH8UNSQ4bXaaDwjopY_57JXjle4vLxlVwcEPr9gEqLBvPAMDKJH2HEk_AesOEALHbkCbtldJLyP_lCfYOk4_sB490BAkMv6IbAEmzadz6Nq1Vzf5sUy-6bjVhPVHstahS5Ld-_xOfCC0DZvU8M27-uMVDQJKUVAbpqxEVXszx1o4oz1uzaeYzywuxWDpKhNu46ynqPJYHAKdoxh6BqOxNnSkMx7iWVlapT8zjcCpCSe3dJDQjV-GOQ"
+			}
+		},
+		"variables": {
+			"array": {
+				"type": "String"
+			},
+			"arrayn": {
+				"type": "Array"
 			}
 		},
 		"annotations": []
