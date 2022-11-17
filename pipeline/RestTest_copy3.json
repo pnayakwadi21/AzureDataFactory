@@ -1,0 +1,97 @@
+{
+	"name": "RestTest_copy3",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.tableapi",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "NestedForEachApidyna",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"mcref": {
+										"value": "@item().cref",
+										"type": "Expression"
+									},
+									"sapiref": {
+										"value": "@item().apiref",
+										"type": "Expression"
+									},
+									"sdesttable": {
+										"value": "@item().desttable",
+										"type": "Expression"
+									},
+									"Btoken": {
+										"value": "Bearer @{activity('Web1').output.access_token}",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://login.microsoftonline.com/71c0b8a3-cb30-44d9-bee9-0711599b39e1/oauth2/v2.0/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "tenant=tenantid&client_id=56ce2011-c83e-4177-bf96-c506a5f62eff &client_secret=hNR8Q~jRsNW~~pPRAemcm31-qG9rQUBIiM~29aq9&grant_type=client_credentials&scope=api://0586721c-b894-41da-9777-4cc8f8c321ef/.default"
+				}
+			}
+		],
+		"parameters": {
+			"tableapi": {
+				"type": "array"
+			}
+		},
+		"variables": {
+			"array": {
+				"type": "String"
+			},
+			"arrayn": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-09T09:35:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
