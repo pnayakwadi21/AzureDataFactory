@@ -1,0 +1,109 @@
+{
+	"name": "NestedForEachApidyna",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.PageNo",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"additionalHeaders": {
+										"Authorization": {
+											"value": "@pipeline().parameters.Btoken",
+											"type": "Expression"
+										},
+										"Ocp-Apim-Subscription-Key": "14cddd7f2bbe4cb3b08bc9bcd4e0f2c9",
+										"Content-Type": "application/Json"
+									},
+									"paginationRules": {
+										"AbsoluteUrl": "$.nextLink"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"translator": {
+									"value": "@json(pipeline().parameters.mcref)",
+									"type": "Expression"
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "RestResource1",
+									"type": "DatasetReference",
+									"parameters": {
+										"BaseUrl": {
+											"value": "@pipeline().parameters.sapiref",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SqlServerTable2",
+									"type": "DatasetReference",
+									"parameters": {
+										"tablename": {
+											"value": "@item().desttable",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"PageNo": {
+				"type": "array",
+				"defaultValue": [
+					1,
+					2,
+					3
+				]
+			},
+			"mcref": {
+				"type": "string"
+			},
+			"sapiref": {
+				"type": "string"
+			},
+			"sdesttable": {
+				"type": "string"
+			},
+			"Btoken": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
