@@ -47,7 +47,7 @@
 										"Content-Type": "application/Json"
 									},
 									"paginationRules": {
-										"AbsoluteUrl.{pg}": "RANGE:1:2000:75"
+										"AbsoluteUrl.{pg}": "RANGE:1:170000:2500"
 									}
 								},
 								"sink": {
@@ -66,7 +66,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"BaseUrl": {
-											"value": "https://api.hcm.zellis.com/hotest/odata/WorkPatterns?page={pg}",
+											"value": "https://api.hcm.zellis.com/hotest/odata/WorkPatterns?take=2500&skip={pg}",
 											"type": "Expression"
 										}
 									}
@@ -105,7 +105,7 @@
 		"parameters": {
 			"PageNo": {
 				"type": "string",
-				"defaultValue": "1,2,3"
+				"defaultValue": "1"
 			},
 			"mcref": {
 				"type": "string",
