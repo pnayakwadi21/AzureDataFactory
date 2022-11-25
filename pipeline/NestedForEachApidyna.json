@@ -47,7 +47,7 @@
 										"Content-Type": "application/Json"
 									},
 									"paginationRules": {
-										"AbsoluteUrl.{pg}": "RANGE:1:170000:2500"
+										"AbsoluteUrl.{pg}": "RANGE:1:142416:2500"
 									}
 								},
 								"sink": {
