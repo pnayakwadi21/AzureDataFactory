@@ -45,9 +45,6 @@
 										},
 										"Ocp-Apim-Subscription-Key": "14cddd7f2bbe4cb3b08bc9bcd4e0f2c9",
 										"Content-Type": "application/Json"
-									},
-									"paginationRules": {
-										"AbsoluteUrl.{pg}": "RANGE:0:142416:2500"
 									}
 								},
 								"sink": {
