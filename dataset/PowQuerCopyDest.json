@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "powsquercopydestt",
+				"fileName": "pqdesttt",
 				"container": "praveen-container"
 			},
 			"columnDelimiter": ",",
