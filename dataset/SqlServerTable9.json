@@ -1,0 +1,29 @@
+{
+	"name": "SqlServerTable9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "apiref",
+				"type": "nvarchar"
+			},
+			{
+				"name": "desttable",
+				"type": "varchar"
+			},
+			{
+				"name": "cref",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadata"
+		}
+	}
+}
