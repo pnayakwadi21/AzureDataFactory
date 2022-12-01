@@ -1,0 +1,35 @@
+{
+	"name": "powerqueSampleCsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDf",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "PowerQuerySimpleCsv.csv",
+				"container": "adf0container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}

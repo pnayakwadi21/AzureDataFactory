@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "powerqueSampleCsv",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  powerqueSampleCsv",
+					"dataset": {
+						"referenceName": "powerqueSampleCsv",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared powerqueSampleCsv = let AdfDoc = AzureStorage.BlobContents(\"https://praveenstorage21.blob.core.windows.net/adf0container/PowerQuerySimpleCsv.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]) in Csv;\r\nshared UserQuery = let Source = #\"powerqueSampleCsv\",\r\n  #\"Sorted rows\" = Table.Sort(Source, {{\"Column1\", Order.Ascending}}),\r\n  #\"Changed column type\" = Table.TransformColumnTypes(#\"Sorted rows\", {{\"Column1\", Int64.Type}, {\"Column2\", Int64.Type}, {\"Column3\", Int64.Type}, {\"Column4\", Int64.Type}}) in #\"Changed column type\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}
