@@ -1,0 +1,20 @@
+{
+	"name": "PowerQuerySink1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"servername": "DWDEVDB,55219",
+				"DbName": "h21_dw"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "PowerQueryTransform"
+		}
+	}
+}
