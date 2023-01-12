@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVault2synapse",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://SynapseRG-kv.vault.azure.net/"
+		}
+	}
+}
