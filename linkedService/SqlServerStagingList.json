@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=DWDEVDB,55219;initial catalog=H21_Staging",
 			"userName": "universe\\nayakwadip",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4NDQyYzY0Yi00MjM3LTQyMjktOTM5My0xMzYyNjk1YTkwYmIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI5NjY0NjEyZC0xZTdkLTQyZTItODdhZS0wNGNjZjc1ZDE3MDgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntimeAzure",
