@@ -1,0 +1,25 @@
+{
+	"name": "SqlServerTable10",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "apiref",
+				"type": "nvarchar"
+			},
+			{
+				"name": "desttable",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "metadata2"
+		}
+	}
+}

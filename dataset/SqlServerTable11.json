@@ -1,0 +1,30 @@
+{
+	"name": "SqlServerTable11",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServerH21",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"servername": "DWDEVDB,55219",
+				"DbName": "h21_dw"
+			}
+		},
+		"parameters": {
+			"schema": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"table": {
+				"type": "string",
+				"defaultValue": "dest"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dest"
+		}
+	}
+}
