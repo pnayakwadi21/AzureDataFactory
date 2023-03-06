@@ -38,8 +38,7 @@
 								"sink": {
 									"type": "SqlServerSink",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": true,
-									"tableOption": "autoCreate"
+									"sqlWriterUseTableLock": true
 								},
 								"enableStaging": false,
 								"translator": {
