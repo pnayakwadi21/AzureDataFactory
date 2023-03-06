@@ -41,8 +41,8 @@
 										"value": "IF EXISTS (SELECT * FROM [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}])TRUNCATE TABLE [@{item().TABLE_SCHEMA}].[@{item().TABLE_NAME}]",
 										"type": "Expression"
 									},
-									"tableOption": "autoCreate",
-									"writeBehavior": "insert"
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": true
 								},
 								"enableStaging": true,
 								"stagingSettings": {
