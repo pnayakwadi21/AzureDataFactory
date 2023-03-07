@@ -29,7 +29,7 @@
 				}
 			},
 			{
-				"name": "Execute Pipeline1",
+				"name": "exp1",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
