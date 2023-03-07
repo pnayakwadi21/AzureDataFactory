@@ -14,64 +14,148 @@
 					},
 					"activities": [
 						{
-							"name": "Copy data1",
-							"type": "Copy",
+							"name": "Switch1",
+							"type": "Switch",
 							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"source": {
-									"type": "SqlServerSource",
-									"sqlReaderQuery": {
-										"value": "SELECT * FROM [@{item().schema}].[@{item().src}]",
-										"type": "Expression"
+								"on": {
+									"value": "@item().src",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "RAW_D100M",
+										"activities": [
+											{
+												"name": "copy1",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "SELECT * FROM [@{item().schema}].[@{item().src}]",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"writeBehavior": "insert",
+														"sqlWriterUseTableLock": true
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SqlServerTableBSource",
+														"type": "DatasetReference"
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "SqlServerTable11",
+														"type": "DatasetReference",
+														"parameters": {
+															"schema": {
+																"value": "@item().schema",
+																"type": "Expression"
+															},
+															"table": {
+																"value": "@item().dest",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
 									},
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
-								},
-								"sink": {
-									"type": "SqlServerSink",
-									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": true
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
+									{
+										"value": "RAW_D126M",
+										"activities": [
+											{
+												"name": "copy2",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "SqlServerSource",
+														"sqlReaderQuery": {
+															"value": "SELECT * FROM [@{item().schema}].[@{item().src}]",
+															"type": "Expression"
+														},
+														"queryTimeout": "02:00:00",
+														"partitionOption": "None"
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"writeBehavior": "insert",
+														"sqlWriterUseTableLock": true
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "SqlServerTableBSource",
+														"type": "DatasetReference"
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "SqlServerTable11",
+														"type": "DatasetReference",
+														"parameters": {
+															"schema": {
+																"value": "@item().schema",
+																"type": "Expression"
+															},
+															"table": {
+																"value": "@item().dest",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											}
+										]
 									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "SqlServerTableBSource",
-									"type": "DatasetReference"
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "SqlServerTable11",
-									"type": "DatasetReference",
-									"parameters": {
-										"schema": {
-											"value": "@item().schema",
-											"type": "Expression"
-										},
-										"table": {
-											"value": "@item().dest",
-											"type": "Expression"
-										}
-									}
-								}
-							]
+								]
+							}
 						}
 					]
 				}
