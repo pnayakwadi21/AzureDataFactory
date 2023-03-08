@@ -1,0 +1,35 @@
+{
+	"name": "DelimitedText12",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDf",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Bp1filename": {
+				"type": "string",
+				"defaultValue": "test1"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "test1.csv",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('test1',formatDatetime(utcnow(),'dd-MM-yyy'),'.csv')",
+					"type": "Expression"
+				},
+				"container": "h21-loader"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
