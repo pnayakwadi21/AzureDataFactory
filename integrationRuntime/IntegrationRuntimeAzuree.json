@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntimeAzuree",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

@@ -1,12 +1,15 @@
 {
 	"name": "AzureSynapseAnalytics1",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDW",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=h21synapseworkspace-ondemand.sql.azuresynapse.net;initial catalog=h21dbdemoservless;user id=synp_sql",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEM5M0NBNjkyLTI3QUMtNEY0Ri1CRENELTAxNEE0MjdGMTY1N19mMDMzMjhjOC0yYjk2LTQ3YzEtOWJjZi1lY2Q0ODgyMzQ4YzUiDQp9"
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=h21synapseworkspace-ondemand.sql.azuresynapse.net;Initial Catalog=h21dbdemoservless"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
 		}
 	}
 }

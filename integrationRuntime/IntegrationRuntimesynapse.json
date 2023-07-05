@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntimesynapse",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

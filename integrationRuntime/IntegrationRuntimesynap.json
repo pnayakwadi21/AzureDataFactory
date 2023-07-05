@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntimesynap",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
